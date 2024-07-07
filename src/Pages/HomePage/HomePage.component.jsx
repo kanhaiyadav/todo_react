@@ -1,10 +1,11 @@
 import React from "react";
 import './HomePage.styles.scss';
+import Main from "../../components/main/main.component";
 
 const HomePage = () => {
     return (
         <div className="HomePage">
-            <h1>Hello world</h1>
+            <Main />
         </div>
     )
 }
