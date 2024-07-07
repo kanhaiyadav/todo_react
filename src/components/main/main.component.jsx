@@ -1,10 +1,12 @@
 import React from "react";
 import "./main.styles.scss";
 
-const Main = () => {
+const Main = ({children}) => {
     return (
         <main>
-
+            {
+                children
+            }
         </main>
     )
 }
