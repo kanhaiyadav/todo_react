@@ -1,6 +1,6 @@
 @import "../../mixin";
 @import "../../variables.scss";
-a {
+nav a {
     color: black;
     width: 100%;
     margin: $base-margin*0.38 0px;
@@ -16,9 +16,9 @@ a {
     li {
         font-size: 1.5rem;
         padding: 8px 5px;
-        padding-left: 7px;
         white-space: nowrap;
         border-radius: $base-border-radius;
+        overflow: hidden;
 
         span {
             font-size: 1.1rem;

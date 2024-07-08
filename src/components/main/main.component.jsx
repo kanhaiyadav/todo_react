@@ -1,9 +1,11 @@
 import React from "react";
 import "./main.styles.scss";
 
-const Main = ({children}) => {
+const Main = ({className, children, style}) => {
     return (
-        <main>
+        <main className={className}
+            style={style}
+        >
             {
                 children
             }

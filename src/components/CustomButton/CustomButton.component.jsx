@@ -1,13 +1,13 @@
 import React from "react";
 import './CustomButton.styles.scss';
 
-const CustomButton = ({ onClick, children }) => {
+const CustomButton = ({ onClick, children, type}) => {
     return (
         <div
             className="custom-button"
             onClick={onClick}
         >
-            <button>{children}</button>
+            <button type={type}>{children}</button>
         </div>
     )
 }

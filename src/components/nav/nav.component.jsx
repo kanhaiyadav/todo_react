@@ -11,6 +11,11 @@ class Nav extends React.Component {
             user: 
                 [
                     {
+                        link: "home",
+                        title: "Home",
+                        icon: "fa-solid fa-house"
+                    },
+                    {
                         link: "/user/settings",
                         title: "Profile",
                         icon: "fa-solid fa-user"

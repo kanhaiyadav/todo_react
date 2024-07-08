@@ -2,6 +2,7 @@
 @import "../../variables.scss";
 
 nav {
+    box-sizing: content-box;
     position: fixed;
     top: 0;
     left: 0;
@@ -24,14 +25,14 @@ nav {
         position: relative;
         background-color: ghostwhite;
         border: 2px solid rgba(82, 81, 81, 0.685);
-        width: 90%;
+        min-width: 43px;
+        width: 100%;
         border-radius: $base-border-radius;
         padding: 5px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        left: -5px;
         img {
             width: 33px;
         }
@@ -50,10 +51,4 @@ nav {
     }
 }
 
-.active {
-    background-color: white !important;
-    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
-    transform: scale(1.08);
-    width: 100%;
-    border-radius: $base-border-radius;
-}
+

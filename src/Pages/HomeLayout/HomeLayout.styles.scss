@@ -1,0 +1,11 @@
+.home-layout{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .home-nav{
+        display: flex;
+        flex-direction: row;
+        justify-content: baseline;
+        gap: 50px;
+    }
+}

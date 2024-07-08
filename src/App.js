@@ -1,14 +1,20 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './Pages/HomePage/HomePage.component';
 import Layout from './components/Layout/Layout.component';
+import HomeLayout from './Pages/HomeLayout/HomeLayout.component';
+import TaskList from './components/TaskList/TaskList.component';
+
 function App() {
 
     return (
         <Routes>
             <Route path='/' element={<Layout />}>
-                <Route index element={<HomePage />} />
-                <Route path='user/settings' element={<HomePage />} />
+                <Route path='home' element={<HomeLayout />} >
+                    <Route index element={<TaskList />} />
+                    <Route path='completed' element={<TaskList />} />
+                    <Route path='deleted' element={<TaskList />} />
+                    <Route path='late' element={<TaskList />} />
+                </Route>
             </Route>
         </Routes>
     )
