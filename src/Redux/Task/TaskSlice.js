@@ -10,10 +10,26 @@ const initialState = {
 export const fetchTasks = createAsyncThunk(
     "task/fetchTasks",
     async () => {
-        const response = await fetch("https://jsonplaceholder.typicode.com/todos?_limit=10");
+        const response = await fetch("http://localhost:3000/api/v1/tasks/list");
         const data = await response.json();
         console.log(data);
-        return data;
+        return data.tasks;
+    }
+);
+
+export const createTask = createAsyncThunk(
+    "task/createTask",
+    async (task) => {
+        const response = await fetch("http://localhost:3000/api/v1/tasks/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(task),
+        });
+        const data = await response.json();
+        console.log(data);
+        return data.data.task;
     }
 );
 
@@ -39,7 +55,14 @@ const TaskSlice = createSlice({
             .addCase(fetchTasks.rejected, (state) => {
                 state.isloading = false;
                 state.error = true;
-            });
+            })
+            .addCase(createTask.pending, (state) => {
+                state.isloading = true;
+            })
+            .addCase(createTask.fulfilled, (state, action) => {
+                state.isloading = false;
+                state.tasks = [...state.tasks, action.payload];
+            })
     }
 });
 

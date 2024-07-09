@@ -6,9 +6,8 @@ import FormTextarea from "../FormTextarea/FormTextarea.component";
 import { useDispatch } from "react-redux";
 import { selectDescription, selectCategory, selectDate } from "../../Redux/TaskForm/TaskFormSelector";
 import { setDescription, setCategory, setDate, setDisplay } from "../../Redux/TaskForm/FormSlice";
-import { addTask } from "../../Redux/Task/TaskSlice";
 import { useSelector } from "react-redux";
-import{ v4 as uuidv4} from 'uuid';
+import { createTask } from "../../Redux/Task/TaskSlice";
 
 
 const TaskForm = () => {
@@ -28,11 +27,10 @@ const TaskForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(setDisplay(false));
-        dispatch(addTask({
-            id: uuidv4(),
+        dispatch(createTask({
             description: description,
             category: category,
-            date: date
+            date: date,
         }));
     }
     return (
