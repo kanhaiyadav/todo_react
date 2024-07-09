@@ -10,4 +10,13 @@
         justify-content: baseline;
         gap: 50px;
     }
+    
 }
+div.loader{
+        width: 100%;
+        position: absolute;
+        background-color: white;
+        top:0px;
+        left:0px;
+        right:0px;
+    }

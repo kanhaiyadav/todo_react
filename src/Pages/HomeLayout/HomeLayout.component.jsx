@@ -8,10 +8,17 @@ import TaskForm from "../../components/TaskForm/TaskForm.component";
 import { selectDisplay } from "../../Redux/TaskForm/TaskFormSelector";
 import { useSelector, useDispatch } from "react-redux";
 import { setDisplay } from "../../Redux/TaskForm/FormSlice";
+import LinearColor from "../../components/Loader/loader";
+import { fetchTasks } from "../../Redux/Task/TaskSlice";
+import { useEffect } from "react";
+import { selectIsLoading } from "../../Redux/Task/TaskSelector";
 
 const HomeLayout = () => {
     const dispatch = useDispatch();
     const display = useSelector(selectDisplay);
+    useEffect(() => {
+        dispatch(fetchTasks());
+    }, [dispatch]);
     const handleClick = () => {
         dispatch(setDisplay(!display));
     }
@@ -64,8 +71,12 @@ const HomeLayout = () => {
                     flexGrow: "1",
                     flexShrink: "1",
                     overflow: "auto",
+                    position: "relative"
                 }}
             >
+                {
+                    useSelector(selectIsLoading) ? <div className="loader"><LinearColor /></div>: null
+                }
                 <Outlet />
             </Main>
         </div>

@@ -6,3 +6,13 @@ export const selectTasks = createSelector(
     [selectTask],
     (task) => task.tasks
 );
+
+export const selectIsLoading = createSelector(
+    [selectTask],
+    (task) => task.isloading
+)
+
+export const selectError = createSelector(
+    [selectTask],
+    (task) => task.error
+)

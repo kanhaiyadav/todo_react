@@ -8,13 +8,14 @@ export default function LinearColor() {
             <LinearProgress 
                 sx={{
                     '& .MuiLinearProgress-bar': {
-                        backgroundColor: 'red', // Change this to your desired color
+                        backgroundColor: '#EE7214', // Change this to your desired color
                     },
                     '&.MuiLinearProgress-colorPrimary': {
-                        backgroundColor: '#ff8f8f', // Custom background color (secondary color)
+                        backgroundColor: '#f8af76', // Custom background color (secondary color)
                     },
                 }}
             />
         </Stack>
     );
 }
+
