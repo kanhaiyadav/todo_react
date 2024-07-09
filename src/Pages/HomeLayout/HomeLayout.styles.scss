@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 95vh;
+    // overflow: scroll;
     .home-nav{
         display: flex;
         flex-direction: row;

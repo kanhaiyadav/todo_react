@@ -1,7 +1,7 @@
 import React from "react";
 import './FormInput.styles.scss';
 
-const FormInput = ({type, name, placeholder, required}) => {
+const FormInput = ({type, name, placeholder, required, onChange, value}) => {
     return (
         <div className="form-input">
             <input
@@ -9,8 +9,10 @@ const FormInput = ({type, name, placeholder, required}) => {
                 name={name}
                 placeholder={placeholder}
                 required={required} 
+                onChange={onChange}
+                value={value}
             />
         </div>
     )
 }
-export default FormInput;
+export default React.memo(FormInput);

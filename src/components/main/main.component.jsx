@@ -13,4 +13,4 @@ const Main = ({className, children, style}) => {
     )
 }
 
-export default Main;
+export default React.memo(Main);

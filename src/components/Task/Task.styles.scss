@@ -1,0 +1,85 @@
+@import "../../mixin";
+@import "../../variables.scss";
+.task {
+    width: 98%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 40px 1fr 160px;
+    border-radius: $base-border-radius * 1.5;
+    margin: $base-td-margin * 0.5 0px;
+    background-color: $alternate-color;
+    padding: $base-td-padding $base-rl-padding;
+    border: 2px solid $alternate-color;
+    font-family: Arial, Helvetica, sans-serif;
+    &:hover {
+        border-color: $base-style-color;
+    }
+    &:active p.task-description {
+        white-space: normal;
+    }
+    i[class="fa-solid fa-trash-can"] {
+        color: black;
+        padding: $base-padding;
+        font-size: $base-font-size;
+        border-radius: 50%;
+        &:hover {
+            color: red;
+        }
+    }
+
+    div {
+        font-size: 1.5rem;
+        div.description {
+            display: grid;
+            grid-template-columns: 0.95fr 0.05fr;
+            p.task-description {
+                padding: 0px 10px;
+                position: relative;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                &:hover {
+                    white-space: normal;
+                }
+            }
+            i {
+                font-size: $base-font-size;
+                color: $base-style-color;
+                margin-right: $base-margin;
+            }
+        }
+        div {
+            display: grid;
+            grid-template-columns: 0.05fr 0.95fr;
+            align-items: center;
+
+            i {
+                color: $base-style-color;
+                padding: 0px 10px;
+                display: inline-block;
+                font-size: $base-font-size * 0.9;
+            }
+            p.date {
+                font-family: "Agency FB";
+                color: rgb(77, 77, 77);
+                padding: 5px 0px 0px 0px;
+                display: inline-block;
+                font-size: $base-font-size * 0.9;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+    p.label {
+        text-align: center;
+        font-size: $base-font-size;
+        color: $base-style-color;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        background-color: ghostwhite;
+        padding: $base-padding;
+        border-radius: $base-border-radius * 2;
+    }
+}

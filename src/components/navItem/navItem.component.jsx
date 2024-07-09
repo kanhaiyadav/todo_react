@@ -23,4 +23,4 @@ const NavItem = ({ to, classname, children }) => {
 
 }
 
-export default NavItem;
+export default React.memo(NavItem);
