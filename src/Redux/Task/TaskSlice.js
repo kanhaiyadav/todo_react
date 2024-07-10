@@ -50,6 +50,19 @@ export const updateTask = createAsyncThunk(
     }
 );
 
+export const deleteTask = createAsyncThunk(
+    "task/deleteTask",
+    async (_id) => {
+        await fetch(`http://localhost:3000/api/v1/tasks/delete/${_id}`, {
+            method: "delete",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        return _id;
+    }
+);
+
 const TaskSlice = createSlice({
     name: "task",
     initialState,
@@ -87,6 +100,13 @@ const TaskSlice = createSlice({
                 state.isloading = false;
                 const index = state.tasks.findIndex((task) => task._id === action.payload._id)
                 state.tasks[index] = action.payload;
+            })
+            .addCase(deleteTask.pending, (state) => {
+                state.isloading = true;
+            })
+            .addCase(deleteTask.fulfilled, (state, action) => {
+                state.isloading = false;
+                state.tasks = state.tasks.filter((task) => task._id !== action.payload);
             })
     }
 });

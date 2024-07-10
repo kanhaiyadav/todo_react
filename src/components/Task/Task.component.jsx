@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setDisplay } from "../../Redux/TaskForm/FormSlice";
 import { setCategory, setDate, setDescription, setUpdateTaskId } from "../../Redux/TaskForm/FormSlice";
 import { useState } from "react";
+import { deleteTask } from "../../Redux/Task/TaskSlice";
 
 const Task = ({ id, description, category, date }) => {
     const dispatch = useDispatch();
@@ -25,12 +26,12 @@ const Task = ({ id, description, category, date }) => {
             <div className="delete-task-button"
                 onClick={(event) => {
                     event.stopPropagation();
-                    console.log("hello");
-                }
-                }
+                    dispatch(deleteTask(id));
+                }}
             >
                 <i className="fa-solid fa-circle-xmark"></i>
             </div>
+
             <div className="checkbox"
                 onClick={(event) => {
                     event.stopPropagation();
@@ -42,6 +43,7 @@ const Task = ({ id, description, category, date }) => {
                 }
                 
             </div>
+
             <div>
                 <div className="description">
                     <p className="task-description">
@@ -55,9 +57,11 @@ const Task = ({ id, description, category, date }) => {
                     </p>
                 </div>
             </div>
+
             <p className="label">
                 {category}
             </p>
+
         </div>
     )
 }
