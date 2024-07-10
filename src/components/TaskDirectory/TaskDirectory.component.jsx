@@ -5,14 +5,15 @@ import { selectTasks } from "../../Redux/Task/TaskSelector";
 import { useSelector } from "react-redux";
 const TaskDirectory = () => {
     const tasks = useSelector(selectTasks);
-    console.log(tasks);
+    // console.log(tasks);
     
     return (
         <div className="task-directory">
             {
                 tasks.map((task) => (
                     <Task
-                        key={task.id}
+                        key={task._id}
+                        id={task._id}
                         description={task.description}
                         category={task.category}
                         date={task.date}

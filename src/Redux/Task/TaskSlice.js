@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
     isloading: false,
     tasks: [],
-    error: false
+    error: false,
 };
 
 
@@ -12,7 +12,7 @@ export const fetchTasks = createAsyncThunk(
     async () => {
         const response = await fetch("http://localhost:3000/api/v1/tasks/list");
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         return data.tasks;
     }
 );
@@ -22,6 +22,23 @@ export const createTask = createAsyncThunk(
     async (task) => {
         const response = await fetch("http://localhost:3000/api/v1/tasks/create", {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(task),
+        });
+        const data = await response.json();
+        // console.log(data);
+        return data.data.task;
+    }
+);
+
+export const updateTask = createAsyncThunk(
+    "task/updateTask",
+    async ({ _id, task }) => {
+        console.log(_id);
+        const response = await fetch(`http://localhost:3000/api/v1/tasks/update/${_id}`, {
+            method: "post",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -39,7 +56,7 @@ const TaskSlice = createSlice({
     reducers: {
         addTask: (state, action) => {
             state.tasks.push(action.payload);
-        },
+        }
     },
 
     //this reducers if for making asynchronus requests
@@ -63,8 +80,16 @@ const TaskSlice = createSlice({
                 state.isloading = false;
                 state.tasks = [...state.tasks, action.payload];
             })
+            .addCase(updateTask.pending, (state) => {
+                state.isloading = true;
+            })
+            .addCase(updateTask.fulfilled, (state, action) => {
+                state.isloading = false;
+                const index = state.tasks.findIndex((task) => task._id === action.payload._id)
+                state.tasks[index] = action.payload;
+            })
     }
 });
 
-export const { addTask } = TaskSlice.actions;
+export const { addTask, setUpdateTaskId } = TaskSlice.actions;
 export default TaskSlice.reducer;

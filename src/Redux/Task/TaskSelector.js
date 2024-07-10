@@ -16,3 +16,8 @@ export const selectError = createSelector(
     [selectTask],
     (task) => task.error
 )
+
+export const selectUpdateTaskId = createSelector(
+    [selectTask],
+    (task) => task.updateTaskId
+)

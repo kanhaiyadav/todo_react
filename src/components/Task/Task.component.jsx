@@ -1,14 +1,47 @@
 import React from "react";
 import './Task.styles.scss';
+import { useDispatch } from "react-redux";
+import { setDisplay } from "../../Redux/TaskForm/FormSlice";
+import { setCategory, setDate, setDescription, setUpdateTaskId } from "../../Redux/TaskForm/FormSlice";
+import { useState } from "react";
 
-const Task = ({description, category, date}) => {
+const Task = ({ id, description, category, date }) => {
+    const dispatch = useDispatch();
+    const [hover, setHover] = useState(false);
+    const [checkbox_clicked, setCheckbox_clicked] = useState(false);
     return (
         <div
             className="task"
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            onClick={() => {
+                dispatch(setDisplay(false));
+                dispatch(setDescription(description));
+                dispatch(setCategory(category));
+                dispatch(setDate(date));
+                dispatch(setUpdateTaskId(id));
+            }}
         >
-            <a href="delete">
-                <i className="fa-solid fa-trash-can"></i>
-            </a>
+            <div className="delete-task-button"
+                onClick={(event) => {
+                    event.stopPropagation();
+                    console.log("hello");
+                }
+                }
+            >
+                <i className="fa-solid fa-circle-xmark"></i>
+            </div>
+            <div className="checkbox"
+                onClick={(event) => {
+                    event.stopPropagation();
+                    setCheckbox_clicked(!checkbox_clicked);
+                }}
+            >
+                {
+                    checkbox_clicked? <i className="fa-solid fa-square-check"></i> :<i className={hover ? `fa-regular fa-square-check` : "fa-regular fa-square"}></i>
+                }
+                
+            </div>
             <div>
                 <div className="description">
                     <p className="task-description">

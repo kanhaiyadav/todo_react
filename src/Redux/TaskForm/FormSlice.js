@@ -5,6 +5,7 @@ const initialState = {
     category: "",
     date: "",
     display: false,
+    updateTaskId: null,
 };
 
 const FromSlice = createSlice({
@@ -23,9 +24,20 @@ const FromSlice = createSlice({
         setDisplay: (state, action) => {
             state.display = action.payload;
         },
+
+        setUpdateTaskId: (state, action) => {
+            state.updateTaskId = action.payload;
+        },
+        reset: (state) => {
+            state.description = "";
+            state.category = "";
+            state.date = "";
+            state.display = false;
+            state.updateTaskId = null;
+        },
     },
 });
 
-export const { setDescription, setCategory, setDate, setDisplay } = FromSlice.actions;
+export const { setDescription, setCategory, setDate, setDisplay, reset, setUpdateTaskId } = FromSlice.actions;
 
 export default FromSlice.reducer;

@@ -11,16 +11,20 @@ import { setDisplay } from "../../Redux/TaskForm/FormSlice";
 import LinearColor from "../../components/Loader/loader";
 import { fetchTasks } from "../../Redux/Task/TaskSlice";
 import { useEffect } from "react";
-import { selectIsLoading } from "../../Redux/Task/TaskSelector";
+import { selectIsLoading} from "../../Redux/Task/TaskSelector";
+import { reset } from "../../Redux/TaskForm/FormSlice";
+import { selectUpdateTaskId } from "../../Redux/TaskForm/TaskFormSelector";
 
 const HomeLayout = () => {
     const dispatch = useDispatch();
     const display = useSelector(selectDisplay);
+    const updateTaskId = useSelector(selectUpdateTaskId);
     useEffect(() => {
         dispatch(fetchTasks());
     }, [dispatch]);
     const handleClick = () => {
-        dispatch(setDisplay(!display));
+        dispatch(reset());
+        dispatch(setDisplay(true));
     }
     return (
         <div className="home-layout">
@@ -50,7 +54,7 @@ const HomeLayout = () => {
             </Main>
 
             {
-                display ?
+                display?
                     <Main
                         style={{
                             width: "68vw",
@@ -58,7 +62,34 @@ const HomeLayout = () => {
                             flexShrink: "0",
                         }}
                     >
-                        <TaskForm />
+                        <TaskForm 
+                            type="create"
+                            onSubmit={(event) => {
+                                event.preventDefault();
+                                console.log(event.target)
+                            }
+                            }
+                        />
+                    </Main>
+                    : null
+            }
+            {
+                updateTaskId?
+                    <Main
+                        style={{
+                            width: "68vw",
+                            flexGrow: "0",
+                            flexShrink: "0",
+                        }}
+                    >
+                        <TaskForm 
+                            type="update"
+                            onSubmit={(event) => {
+                                event.preventDefault();
+                                console.log(event.target)
+                            }
+                            }
+                        />
                     </Main>
                     : null
             }

@@ -21,3 +21,8 @@ export const selectDate = createSelector(
     [selectForm],
     (form) => form.date
 )
+
+export const selectUpdateTaskId = createSelector(
+    [selectForm],
+    (form) => form.updateTaskId
+)
