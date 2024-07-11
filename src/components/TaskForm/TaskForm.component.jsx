@@ -5,7 +5,7 @@ import CustomButton from "../CustomButton/CustomButton.component";
 import FormTextarea from "../FormTextarea/FormTextarea.component";
 import { useDispatch } from "react-redux";
 import { selectDescription, selectCategory, selectDate } from "../../Redux/TaskForm/TaskFormSelector";
-import { setDescription, setCategory, setDate, reset } from "../../Redux/TaskForm/FormSlice";
+import { setDescription, setCategory, setDate, reset } from "../../Redux/TaskForm/TaskFormSlice";
 import { useSelector } from "react-redux";
 import { createTask, updateTask } from "../../Redux/Task/TaskSlice";
 import { selectUpdateTaskId } from "../../Redux/TaskForm/TaskFormSelector";

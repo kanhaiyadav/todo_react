@@ -1,8 +1,8 @@
 import React from "react";
 import './Task.styles.scss';
 import { useDispatch } from "react-redux";
-import { setDisplay } from "../../Redux/TaskForm/FormSlice";
-import { setCategory, setDate, setDescription, setUpdateTaskId } from "../../Redux/TaskForm/FormSlice";
+import { setDisplay } from "../../Redux/TaskForm/TaskFormSlice";
+import { setCategory, setDate, setDescription, setUpdateTaskId } from "../../Redux/TaskForm/TaskFormSlice";
 import { useState } from "react";
 import { deleteTask } from "../../Redux/Task/TaskSlice";
 

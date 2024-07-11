@@ -20,11 +20,12 @@ nav a {
         border-radius: $base-border-radius;
         overflow: hidden;
 
-        span {
+        
+    }
+}
+span.nav-text {
             font-size: 1.1rem;
             margin: 0px 0px 0px 10px;
             display: none;
             white-space: nowrap;
         }
-    }
-}

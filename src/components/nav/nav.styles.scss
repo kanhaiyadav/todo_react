@@ -15,6 +15,7 @@ nav {
     justify-content: flex-start;
     padding: 10px;
     transition: width 0.1s linear;
+    // position: relative;
     &:hover {
         width: 190px;
     }
@@ -48,6 +49,12 @@ nav {
     }
     &:hover .nav-title {
         display: inline-block;
+    }
+    .custom-button{
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        width: 90%;
     }
 }
 

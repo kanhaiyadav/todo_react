@@ -16,7 +16,7 @@ const NavItem = ({ to, classname, children }) => {
         >
             <li>
                 <i className={classname}></i>
-                <span>{children}</span>
+                <span className="nav-text">{children}</span>
             </li>
         </NavLink>
     )

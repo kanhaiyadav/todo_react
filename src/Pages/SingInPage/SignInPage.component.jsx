@@ -1,12 +1,12 @@
 import React from 'react';
-import './SignUpPage.styles.scss';
-import SignUPForm from '../../components/SignUpForm/SignUPForm.component';
+import "../SignUpPage/SignUpPage.styles.scss";
+import SignInForm from '../../components/SignInForm/SignInForm.component';
 import { Link } from 'react-router-dom';
 import LinearColor from '../../components/Loader/loader';
 import { selectIsLoading } from '../../Redux/user/user.selector';
 import { useSelector } from 'react-redux';
 
-const SignUpPage = () => {
+const SignInPage = () => {
     return (
         <>
             <div className='loader'>
@@ -29,11 +29,11 @@ const SignUpPage = () => {
                         <span>Microsoft</span>
                     </div>
                 </div>
-                <SignUPForm />
-                <p> Already have an account?<Link to='/login'>Sign in</Link></p>
+                <SignInForm />
+                <p>Don't have an account?<Link to='/singup'>Sign up</Link></p>
             </div>
         </>
     )
 }
 
-export default SignUpPage;
+export default SignInPage;

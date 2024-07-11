@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const selectForm = (state) => state.form;
+const selectForm = (state) => state.TaskForm;
 
 export const selectDisplay = createSelector(
     [selectForm],

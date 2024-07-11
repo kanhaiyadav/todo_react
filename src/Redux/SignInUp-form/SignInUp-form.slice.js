@@ -23,8 +23,14 @@ const SignInUpFormSlice = createSlice({
         setConfirmPassword: (state, action) => {    
             state.confirmPassword = action.payload;
         },
+        reset: (state) => {
+            state.name = "";
+            state.email = "";
+            state.password = "";
+            state.confirmPassword = "";
+        },
     },
 });
 
-export const { setName, setEmail, setPassword, setConfirmPassword } = SignInUpFormSlice.actions;
+export const { setName, setEmail, setPassword, setConfirmPassword, reset } = SignInUpFormSlice.actions;
 export default SignInUpFormSlice.reducer;
