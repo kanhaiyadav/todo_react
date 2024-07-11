@@ -31,7 +31,6 @@ main {
     flex-direction: column;
     align-items: center;
     position: relative;
-    left: 35px;
     border-radius: $base-border-radius * 2;
     padding: $base-padding * 2;
     background-color: rgba(200, 200, 200, 0.662);
@@ -39,5 +38,6 @@ main {
     &::-webkit-scrollbar {
         display: none;
     }
+    transition:0.3s ease-in-out;
     
 }

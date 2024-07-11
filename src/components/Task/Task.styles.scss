@@ -12,6 +12,7 @@
     padding: $base-td-padding $base-rl-padding;
     border: 2px solid $alternate-color;
     font-family: Arial, Helvetica, sans-serif;
+    cursor: default;
     &:hover {
         border-color: $base-style-color;
         div.delete-task-button{

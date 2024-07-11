@@ -1,0 +1,57 @@
+div.signup-page{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // height: 100vh;
+    div.social-auth{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 98%;
+        margin-bottom: 20px;
+        div.google{
+            background-color: white;
+            width: 30%;
+        }
+        div.github{
+            background-color: black;
+            width: 30%;
+            span{
+                color: white
+            }
+        }
+        div.microsoft{
+            background-color: white;
+            width: 30%;
+        }
+        div{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            padding:8px 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
+            cursor: default;
+            img{
+                width: 25px;
+            }
+        }
+    }
+    p{
+        margin: 20px 0px;
+        color: white;
+        a{
+            text-decoration: none;
+            font-size: 1.05rem;
+            color: white;
+            font-weight: 600;
+            margin: 0px 5px;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -5,9 +5,11 @@
     border-radius: $base-border-radius * 0.5;
     font-family: "Arial Narrow", sans-serif;
     box-shadow: 2px 2px 4px 2px rgba(27, 27, 27, 0.2);
+    display: grid;
+    place-items: center;
     &:hover {
         transform: scale(1.04);
-        background-color: $base-hover-color;
+        background-color: #f58026;
     }
     &:active {
         transform: scale(0.95);
