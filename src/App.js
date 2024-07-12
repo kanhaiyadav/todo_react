@@ -13,7 +13,7 @@ function App() {
         <Routes>
             <Route path='/' element={<Layout />}>
                 <Route path='signup' element={<SignUpPage />} />
-                <Route path='signin' element={<SignInPage />} />
+                <Route path='login' element={<SignInPage />} />
                 <Route path='home' element={<HomeLayout />} >
                     <Route index element={<TaskDirectory type="due"/>} />
                     <Route path='completed' element={<TaskDirectory type="completed"/>} />
