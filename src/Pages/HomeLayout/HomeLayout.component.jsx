@@ -37,7 +37,7 @@ const HomeLayout = () => {
     
     useEffect(() => {
         if (error) {
-            navigate("/signin");
+            navigate("/login");
         }
     }, [error, navigate]);
 
