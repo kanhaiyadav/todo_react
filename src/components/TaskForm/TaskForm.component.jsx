@@ -9,9 +9,13 @@ import { setDescription, setCategory, setDate, reset } from "../../Redux/TaskFor
 import { useSelector } from "react-redux";
 import { createTask, updateTask } from "../../Redux/Task/TaskSlice";
 import { selectUpdateTaskId } from "../../Redux/TaskForm/TaskFormSelector";
+import { selectJwt } from "../../Redux/user/user.selector";
+import { toast } from "react-toastify";
 
-const TaskForm = ({type}) => {
+const TaskForm = ({ type }) => {
     const dispatch = useDispatch();
+    const jwt = useSelector(selectJwt);
+
     const handleTextareaChange = (event) => {
         dispatch(setDescription(event.target.value));
     }
@@ -22,7 +26,7 @@ const TaskForm = ({type}) => {
         console.log(event.target.value);
         dispatch(setDate(event.target.value));
     }
-    
+
     const description = useSelector(selectDescription);
     const category = useSelector(selectCategory);
     const date = useSelector(selectDate);
@@ -31,15 +35,34 @@ const TaskForm = ({type}) => {
     const taskCreate = (event) => {
         event.preventDefault();
         dispatch(reset());
-        dispatch(createTask({
-            description: description,
-            category: category,
-            date: date,
-        }));
+        const createPromise =
+            dispatch(createTask({
+                task: {
+                    description: description,
+                    category: category,
+                    date: date,
+                },
+                token: jwt
+            })).unwrap();
+
+        toast.promise(createPromise, {
+            pending: 'Creating task...',
+            success: {
+                render({ data }) {
+                    return data.message
+                },
+            },
+            error: {
+                render({ data }) {
+                    return data.message
+                },
+            }
+        })
     }
     const taskUpdate = (event) => {
         event.preventDefault();
         dispatch(reset());
+        const updatePromise = 
         dispatch(updateTask({
             _id: updateTaskId,
             task: {
@@ -47,13 +70,27 @@ const TaskForm = ({type}) => {
                 category: category,
                 date: date,
             }
-        }));
+        })).unwrap();
+
+        toast.promise(updatePromise, {      
+            pending: 'Updating task...',
+            success: {
+                render({ data }) {
+                    return data.message
+                },
+            },
+            error: {
+                render({ data }) {
+                    return data.message
+                },
+            }
+        })
     }
     const actions = {
         create: taskCreate,
         update: taskUpdate
     }
-    
+
     return (
         <form
             id="add-task"

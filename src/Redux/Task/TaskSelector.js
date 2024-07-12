@@ -2,10 +2,15 @@ import { createSelector } from "@reduxjs/toolkit";
 
 const selectTask = (state) => state.task;
 
-export const selectTasks = createSelector(
+export const selectAllTasks = createSelector(
     [selectTask],
     (task) => task.tasks
 );
+
+export const selectTypicalTasks = (type) => createSelector(
+    [selectAllTasks],
+    (tasks) => tasks.filter((task) => task.type === type)
+)
 
 export const selectIsLoading = createSelector(
     [selectTask],

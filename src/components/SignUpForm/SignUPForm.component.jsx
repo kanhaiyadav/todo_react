@@ -9,6 +9,7 @@ import { register } from '../../Redux/user/user.slice';
 import { selectEmail, selectName, selectPassword, selectConfirmPassword } from '../../Redux/SignInUp-form/SignInUp-selector';
 import { reset } from '../../Redux/SignInUp-form/SignInUp-form.slice';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SignUPForm = () => {
     const dispatch = useDispatch();
@@ -36,12 +37,26 @@ const SignUPForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(register({
-            name: name,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword
-        }))
+        const signupPromise =
+            dispatch(register({
+                name: name,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            })).unwrap();
+        toast.promise(signupPromise, {
+            pending: 'Signing up...',
+            success: {
+                render({ data }) {
+                    return data.message
+                },
+            },
+            error: {
+                render({ data }) {
+                    return data.message
+                },
+            }
+        })
         dispatch(reset());
         navigate('/signin');
     }

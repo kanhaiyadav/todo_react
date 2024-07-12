@@ -30,7 +30,7 @@ const SignInPage = () => {
                     </div>
                 </div>
                 <SignInForm />
-                <p>Don't have an account?<Link to='/singup'>Sign up</Link></p>
+                <p>Don't have an account?<Link to='/signup'>Sign up</Link></p>
             </div>
         </>
     )

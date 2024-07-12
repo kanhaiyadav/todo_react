@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState = {
     jwt: "",
@@ -11,31 +12,8 @@ const initialState = {
 export const register = createAsyncThunk(
     "user/register",
     async (user) => {
-        let response = await fetch("http://localhost:3000/api/v1/users/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(user),
-        });
-        if (response.ok) {
-            response = await response.json();
-            console.log(response);
-            return response.data.user;
-        }
-        else {
-            response = await response.json();
-            throw new Error(response.message);
-        }
-    }
-)
-
-
-export const createSession = createAsyncThunk(
-    "user/createSession",
-    async (user) => {
         try {
-            let response = await fetch("http://localhost:3000/api/v1/users/login", {
+            let response = await fetch("http://localhost:3000/api/v1/users/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -47,8 +25,36 @@ export const createSession = createAsyncThunk(
                 throw new Error(response.message);
             }
             response = await response.json();
-            return response.data;
+            return response;
+
+        }
+        catch (error) {
+            throw (error);
+        }
+    }
+)
+
+
+export const createSession = createAsyncThunk(
+    "user/createSession",
+    async (user) => {
+        try {
+            let response = await fetch("http://localhost:3000/api/v1/users/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user),
+                },
+            );
+            if (!response.ok) {
+                response = await response.json();
+                throw new Error(response.message);
+            }
+            response = await response.json();
+            return response;
         } catch (error) {
+            toast.error(error);
             throw (error);
         }
     }
@@ -96,12 +102,12 @@ const UserSlice = createSlice({
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.isloading = false;
-                state.error = false;
-                state.user = action.payload;
+                state.error = "";
+                state.user = action.payload.data.user;
             })
-            .addCase(register.rejected, (state) => {
+            .addCase(register.rejected, (state, action) => {
                 state.isloading = false;
-                state.error = true;
+                state.error = action.error.message || "Failed to register";
             })
             .addCase(createSession.pending, (state) => {
                 state.isloading = true;
@@ -109,22 +115,24 @@ const UserSlice = createSlice({
             .addCase(createSession.fulfilled, (state, action) => {
                 state.isloading = false;
                 state.error = ""; // Clear error state on successful login
-                state.user = action.payload.user; // Assuming action.payload contains user data
-                state.jwt = action.payload.token;
+                state.user = action.payload.data.user; // Assuming action.payload contains user data
+                state.jwt = action.payload.data.token;
             })
             .addCase(createSession.rejected, (state, action) => {
                 state.isloading = false;
-                state.error = action.payload || "Failed to login";
+                state.error = action.error.message || "Failed to login";
             })
             .addCase(verify.pending, (state) => {
                 state.isloading = true;
             })
             .addCase(verify.fulfilled, (state) => {
                 state.isloading = false;
+                state.error = "";
             })
             .addCase(verify.rejected, (state, action) => {
                 state.isloading = false;
-                state.error = action.payload || "failed to varify";
+                state.jwt = "";
+                state.error = action.error.message || "failed to varify";
             });
     },
 });

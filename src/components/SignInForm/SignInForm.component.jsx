@@ -10,6 +10,7 @@ import { selectEmail, selectPassword } from '../../Redux/SignInUp-form/SignInUp-
 import { reset } from '../../Redux/SignInUp-form/SignInUp-form.slice';
 import { useNavigate } from 'react-router-dom';
 import { selectJwt } from '../../Redux/user/user.selector';
+import { toast } from 'react-toastify';
 
 const SignInForm = () => {
     const dispatch = useDispatch();
@@ -29,10 +30,25 @@ const SignInForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(createSession({
-            email: email,
-            password: password,
-        }))
+        const loginPromise =
+            dispatch(createSession({
+                email: email,
+                password: password,
+            })).unwrap();
+        
+        toast.promise(loginPromise, {
+            pending: 'Logging in...',
+            success: {
+                render({ data }) {
+                    return data.message
+                },
+            },
+            error: {
+                render({ data }) {
+                    return data.message
+                },
+            }
+        })
         dispatch(reset());
     }
 

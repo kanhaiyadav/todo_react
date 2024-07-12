@@ -5,7 +5,8 @@ import favicon from "../../images/favicon.png";
 import CustomButton from "../CustomButton/CustomButton.component";
 import { setJwt } from "../../Redux/user/user.slice";
 import { useDispatch, useSelector } from "react-redux";
-import {selectJwt} from "../../Redux/user/user.selector";
+import { selectJwt } from "../../Redux/user/user.selector";
+import { toast } from "react-toastify";
 
 const Nav = () => {
     const dispatch = useDispatch();
@@ -51,6 +52,7 @@ const Nav = () => {
     })
     const handleClick = () => {
         dispatch(setJwt(""));
+        toast.success("Logged out successfully");
     }
     return (
         <nav>

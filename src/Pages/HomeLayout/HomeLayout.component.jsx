@@ -17,6 +17,7 @@ import { selectUpdateTaskId } from "../../Redux/TaskForm/TaskFormSelector";
 import { verify } from "../../Redux/user/user.slice";
 import { selectError, selectJwt } from "../../Redux/user/user.selector";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const HomeLayout = () => {
     const dispatch = useDispatch();
@@ -25,9 +26,6 @@ const HomeLayout = () => {
     const error = useSelector(selectError);
     const navigate = useNavigate();
     const token = useSelector(selectJwt);
-    useEffect(() => {
-        dispatch(fetchTasks());
-    }, [dispatch]);
     const handleClick = () => {
         dispatch(reset());
         dispatch(setDisplay(true));

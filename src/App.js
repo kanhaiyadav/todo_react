@@ -15,11 +15,10 @@ function App() {
                 <Route path='signup' element={<SignUpPage />} />
                 <Route path='signin' element={<SignInPage />} />
                 <Route path='home' element={<HomeLayout />} >
-                    <Route index element={<TaskDirectory />} />
-                    <Route path='completed' element={<TaskList />} />
-                    <Route path='deleted' element={<TaskList />} />
-                    <Route path='late' element={<TaskList />} />
-                    <Route path='new-task' element={<TaskList />} />
+                    <Route index element={<TaskDirectory type="due"/>} />
+                    <Route path='completed' element={<TaskDirectory type="completed"/>} />
+                    <Route path='deleted' element={<TaskDirectory type="deleted" />} />
+                    <Route path='late' element={<TaskDirectory type="late" />} />
                 </Route>
             </Route>
         </Routes>
