@@ -9,7 +9,6 @@ import { selectDisplay } from "../../Redux/TaskForm/TaskFormSelector";
 import { useSelector, useDispatch } from "react-redux";
 import { setDisplay } from "../../Redux/TaskForm/TaskFormSlice";
 import LinearColor from "../../components/Loader/loader";
-import { fetchTasks } from "../../Redux/Task/TaskSlice";
 import { useEffect } from "react";
 import { selectIsLoading } from "../../Redux/Task/TaskSelector";
 import { reset } from "../../Redux/TaskForm/TaskFormSlice";
@@ -17,7 +16,6 @@ import { selectUpdateTaskId } from "../../Redux/TaskForm/TaskFormSelector";
 import { verify } from "../../Redux/user/user.slice";
 import { selectError, selectJwt } from "../../Redux/user/user.selector";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const HomeLayout = () => {
     const dispatch = useDispatch();

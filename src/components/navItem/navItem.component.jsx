@@ -1,6 +1,4 @@
 import React from "react";
-// import './navItem.styles.scss';
-import { NavLink } from "react-router-dom";
 import { NavItemContainer } from "./navItem.styles";
 
 const NavItem = ({ to, classname, children }) => {
