@@ -1,0 +1,17 @@
+@import "../../mixin";
+@import "../../variables.scss";
+
+.form-textarea {
+    textarea{
+        width: 100%;
+        padding: $base-padding;
+        font-size: $base-font-size * 1.153;
+        display: inline;
+        outline: none;
+        border: none;
+        background-color: $alternate-color;
+        border-radius: $base-border-radius;
+        border-bottom: $base-border-thickness * 2 $base-border-style $base-style-color;
+        font-family: "Poppins", sans-serif;
+    }
+}

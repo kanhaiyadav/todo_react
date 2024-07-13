@@ -1,0 +1,31 @@
+@import "../../mixin";
+@import "../../variables.scss";
+nav a {
+    color: black;
+    width: 100%;
+    margin: $base-margin*0.38 0px;
+    &:hover {
+        background-color: $alternate-color;
+        box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+        border-radius: $base-border-radius;
+        width: 100%;
+    }
+    &:active{
+        transform: scale(0.95);
+    }
+    li {
+        font-size: 1.5rem;
+        padding: 8px 5px;
+        white-space: nowrap;
+        border-radius: $base-border-radius;
+        overflow: hidden;
+
+        
+    }
+}
+span.nav-text {
+            font-size: 1.1rem;
+            margin: 0px 0px 0px 10px;
+            display: none;
+            white-space: nowrap;
+        }

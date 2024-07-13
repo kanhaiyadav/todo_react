@@ -1,9 +1,8 @@
-@import "../../mixin";
-@import "../../variables.scss";
+
 form {
     position: relative;
     width: 100%;
-    border-radius: $base-border-radius;
+    border-radius: 10px;
     position: relative;
     display: flex;
     flex-direction: column;
