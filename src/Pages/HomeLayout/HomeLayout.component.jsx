@@ -1,5 +1,5 @@
 import React from "react";
-import "./HomeLayout.styles.scss";
+import { HomeLayoutContainer, Loader } from "./HomeLayout.styles";
 import { Outlet } from "react-router-dom";
 import Main from "../../components/main/main.component";
 import HomeNavItem from "../../components/HomeNavItem/HomeNavItem.component";
@@ -11,7 +11,7 @@ import { setDisplay } from "../../Redux/TaskForm/TaskFormSlice";
 import LinearColor from "../../components/Loader/loader";
 import { fetchTasks } from "../../Redux/Task/TaskSlice";
 import { useEffect } from "react";
-import { selectIsLoading} from "../../Redux/Task/TaskSelector";
+import { selectIsLoading } from "../../Redux/Task/TaskSelector";
 import { reset } from "../../Redux/TaskForm/TaskFormSlice";
 import { selectUpdateTaskId } from "../../Redux/TaskForm/TaskFormSelector";
 import { verify } from "../../Redux/user/user.slice";
@@ -34,7 +34,7 @@ const HomeLayout = () => {
         console.log(token);
         dispatch(verify(token));
     }, [dispatch, token]);
-    
+
     useEffect(() => {
         if (error) {
             navigate("/login");
@@ -43,11 +43,13 @@ const HomeLayout = () => {
 
 
     return (
-        <div className="home-layout">
+        <HomeLayoutContainer>
             <Main
-                className="home-nav"
                 style={{
-                    padding: "5px 10px",
+                    padding: "10px 15px",
+                    flexDirection: "row",
+                    justifyContent: "baseline",
+                    gap: "50px"
                 }}
             >
                 <HomeNavItem link=".">Tasks</HomeNavItem>
@@ -56,10 +58,10 @@ const HomeLayout = () => {
                 <HomeNavItem link="late">Late</HomeNavItem>
                 <CustomButton
                     type="button"
+                    shape='circular'
+                    effect='inverted'
                     style={{
-                        borderRadius: "50%",
                         marginLeft: "auto",
-                        padding: "1px",
                         flexGrow: "0",
                         flexShrink: "0",
                     }}
@@ -70,7 +72,7 @@ const HomeLayout = () => {
             </Main>
 
             {
-                display?
+                display ?
                     <Main
                         style={{
                             width: "68vw",
@@ -78,7 +80,7 @@ const HomeLayout = () => {
                             flexShrink: "0",
                         }}
                     >
-                        <TaskForm 
+                        <TaskForm
                             type="create"
                             onSubmit={(event) => {
                                 event.preventDefault();
@@ -90,7 +92,7 @@ const HomeLayout = () => {
                     : null
             }
             {
-                updateTaskId?
+                updateTaskId ?
                     <Main
                         style={{
                             width: "68vw",
@@ -98,7 +100,7 @@ const HomeLayout = () => {
                             flexShrink: "0",
                         }}
                     >
-                        <TaskForm 
+                        <TaskForm
                             type="update"
                             onSubmit={(event) => {
                                 event.preventDefault();
@@ -122,11 +124,11 @@ const HomeLayout = () => {
                 }}
             >
                 {
-                    useSelector(selectIsLoading) ? <div className="loader"><LinearColor /></div>: null
+                    useSelector(selectIsLoading) ? <Loader><LinearColor /></Loader> : null
                 }
                 <Outlet />
             </Main>
-        </div>
+        </HomeLayoutContainer>
     )
 }
 

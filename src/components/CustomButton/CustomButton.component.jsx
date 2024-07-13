@@ -1,17 +1,18 @@
 import React from "react";
-import './CustomButton.styles.scss';
+// import './CustomButton.styles.scss';
+import { CustomButtonContainer } from "./CustomButton.Styles";
 
-const CustomButton = ({ onClick, children, type, style, buttonStyle}) => {
+const CustomButton = ({ onClick, children, type, style,shape, effect}) => {
     return (
-        <div
-            className="custom-button"
+        <CustomButtonContainer
+            shape={shape}
+            effect={effect}
             onClick={onClick}
             style={style}
+            type={type}
         >
-            <button type={type}
-                style={buttonStyle}
-            >{children}</button>
-        </div>
+            {children}
+        </CustomButtonContainer>
     )
 }
 

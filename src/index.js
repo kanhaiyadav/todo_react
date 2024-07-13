@@ -7,10 +7,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
+import GlobalStyle from './components/GlobalStyle';
 
 //toastify
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+//Theme
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,7 +23,10 @@ root.render(
         <React.StrictMode>
             <PersistGate persistor={persistor}>
                 <BrowserRouter>
-                    <App />
+                    <GlobalStyle />
+                    <ThemeProvider theme={theme}>
+                        <App />
+                    </ThemeProvider>
                     <ToastContainer />
                 </BrowserRouter>
             </PersistGate>

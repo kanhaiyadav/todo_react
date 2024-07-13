@@ -68,15 +68,11 @@ const SignInForm = () => {
             >
                 <SignInUpInput type={'email'} name={'email'} required={true} onChange={handleEmailChange} value={email} label={'Enter your email'} autoFocus/>
                 <SignInUpInput type={'password'} name={'password'} required={true} onChange={handlePasswordChange} value={password} label={'Enter your password'} />
-                <CustomButton type={'submit'}
+                <CustomButton type={'submit'} shape='regular' effect='scale'
                     style={{
                         width: "40%",
                         marginTop: "10px",
-                    }}
-                    buttonStyle={{
-                        fontSize: "1.1rem",
-                        width: "100%",
-                        padding: '8px 10px'
+                        fontSize: '1.2rem'
                     }}
                 >Sign In</CustomButton>
             </form>

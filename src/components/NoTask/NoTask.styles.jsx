@@ -1,4 +1,6 @@
-.no-task{
+import styled from "styled-components";
+
+export const NoTaskContainer = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -16,4 +18,4 @@
             font-size: 1.3rem;
         }
     }
-}
+`

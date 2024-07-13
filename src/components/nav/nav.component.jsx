@@ -1,5 +1,5 @@
 import React from "react";
-import "./nav.styles.scss";
+import { NavContainer, HeaderContainer } from "./nav.styles";
 import NavItemDirectory from "../navItemDirectory/navItemDirectory.component";
 import favicon from "../../images/favicon.png";
 import CustomButton from "../CustomButton/CustomButton.component";
@@ -7,6 +7,7 @@ import { setJwt } from "../../Redux/user/user.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectJwt } from "../../Redux/user/user.selector";
 import { toast } from "react-toastify";
+import { NavItemContainer } from "../navItem/navItem.styles";
 
 const Nav = () => {
     const dispatch = useDispatch();
@@ -20,12 +21,12 @@ const Nav = () => {
                     icon: "fa-solid fa-house"
                 },
                 {
-                    link: "/user/settings",
+                    link: "profile",
                     title: "Profile",
                     icon: "fa-solid fa-user"
                 },
                 {
-                    link: "asdasd",
+                    link: "upgrade",
                     title: "Upgrade",
                     icon: "fa-solid fa-dollar-sign"
                 },
@@ -55,30 +56,32 @@ const Nav = () => {
         toast.success("Logged out successfully");
     }
     return (
-        <nav>
-            <div className="Header">
+        <NavContainer>
+            <HeaderContainer>
                 <img src={favicon} alt="" />
                 <span>ToDo</span>
-            </div>
+            </HeaderContainer>
             <NavItemDirectory items={state.user} />
             <hr />
             <NavItemDirectory items={state.general} />
             {
                 jwt ? 
-                    <CustomButton onClick={handleClick}
+                    <NavItemContainer as={CustomButton}
+                        shape='regular'
+                        effect='scale'
                         style={{
-                            marginLeft: "5px"
+                            position: "relative",
+                            bottom: '-250px',
+                            width: "90%",
                         }}
-                        buttonStyle={{
-                            display: "flex",
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                        }}
-                    ><i className="fa-solid fa-right-from-bracket"></i><span className="nav-text">Logout</span></CustomButton>
+                        onClick={handleClick}
+                    >
+                        <div><i className="fa-solid fa-right-from-bracket"></i></div>
+                        <span>Logout</span>
+                    </NavItemContainer>
                 : null
             }
-        </nav>
+        </NavContainer>
     )
 }
 

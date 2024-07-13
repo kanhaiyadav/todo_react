@@ -1,5 +1,5 @@
 import React from "react";
-import './TaskForm.styles.scss';
+import { Form } from './TaskFrom.styles';
 import FormInput from "../FormInput/FormInput.component";
 import CustomButton from "../CustomButton/CustomButton.component";
 import FormTextarea from "../FormTextarea/FormTextarea.component";
@@ -92,8 +92,7 @@ const TaskForm = ({ type }) => {
     }
 
     return (
-        <form
-            id="add-task"
+        <Form
             onSubmit={actions[type]}
         >
             <FormTextarea
@@ -102,16 +101,17 @@ const TaskForm = ({ type }) => {
                 required={true}
                 onChange={handleTextareaChange}
                 value={description}
+                autoFocus
             />
             <FormInput type='text' name='category' placeholder={"Choose Category..."} required={true} value={category} onChange={handleCategoryChange} />
             <FormInput type='Date' name='Date' required={true} value={date} onChange={handleDateChange} />
             <div className="buttons">
-                <CustomButton type='submit'>Done</CustomButton>
-                <CustomButton type='button'
+                <CustomButton type='submit' shape='regular' effect='scale'>Done</CustomButton>
+                <CustomButton type='button' shape='regular' effect='scale'
                     onClick={() => dispatch(reset())}
                 >Cancel</CustomButton>
             </div>
-        </form>
+        </Form>
     )
 }
 

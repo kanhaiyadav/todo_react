@@ -1,7 +1,5 @@
 import React from "react";
-import "./HomeNavItem.styles.scss";
-import { NavLink } from "react-router-dom";
-
+import { HomeNavItemContainer } from "./HomeNavItem.styles";
 const HomeNavItem = ({ link, children, style }) => {
 
     const activeStyle = {
@@ -11,14 +9,14 @@ const HomeNavItem = ({ link, children, style }) => {
         ...style
     }
     return (
-        <NavLink
+        <HomeNavItemContainer
             to={link}
             end
             style={({ isActive }) => isActive ? activeStyle : { ...style }}
             className={"home-nav-item"}
         >
             {children}
-        </NavLink>
+        </HomeNavItemContainer>
     )
 };
 

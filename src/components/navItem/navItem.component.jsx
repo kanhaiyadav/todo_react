@@ -1,6 +1,7 @@
 import React from "react";
-import './navItem.styles.scss';
+// import './navItem.styles.scss';
 import { NavLink } from "react-router-dom";
+import { NavItemContainer } from "./navItem.styles";
 
 const NavItem = ({ to, classname, children }) => {
     const activeStyle = {
@@ -10,15 +11,13 @@ const NavItem = ({ to, classname, children }) => {
         borderRadius: "10px",
     }
     return (
-        <NavLink
+        <NavItemContainer
             to={to}
-            style={ ({ isActive }) => isActive ? activeStyle : null }
+            style={({ isActive }) => isActive ? activeStyle : null}
         >
-            <li>
-                <i className={classname}></i>
-                <span className="nav-text">{children}</span>
-            </li>
-        </NavLink>
+            <div><i className={classname}></i></div>
+            <span>{children}</span>
+        </NavItemContainer>
     )
 
 }

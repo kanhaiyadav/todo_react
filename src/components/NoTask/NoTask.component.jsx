@@ -1,5 +1,5 @@
 import React from 'react';
-import './NoTask.styles.scss';
+import { NoTaskContainer } from './NoTask.styles';
 import logo from '../../assets/NoTaskImg.png';
 import NoCompleteTask from "../../assets/hand-drawn-no-data-illustration.png";
 
@@ -16,11 +16,11 @@ const greeting = {
 
 const NoTask = ({ type }) => {
     return (
-        <div className='no-task'>
+        <NoTaskContainer>
             <img src={imgPath[type]} alt="No Task" />
             <p>{greeting[type]}</p>
             <p className='motivation'>A new task is a new opportunity. Add one and seize the day!</p>
-        </div>
+        </NoTaskContainer>
     )
 }
 

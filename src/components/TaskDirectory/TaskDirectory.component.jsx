@@ -1,5 +1,5 @@
 import React from "react";
-import "./TaskDirectory.styles.scss";
+import { TaskDirectoryContainer } from "./TaskDirectory.styles";
 import Task from "../Task/Task.component";
 import NoTask from "../NoTask/NoTask.component";
 import { selectJwt } from "../../Redux/user/user.selector";
@@ -22,7 +22,7 @@ const TaskDirectory = ({ type }) => {
     // console.log(tasks);
     
     return (
-        <div className="task-directory">
+        <TaskDirectoryContainer>
             {
                 tasks.map((task) => (
                     <Task
@@ -38,7 +38,7 @@ const TaskDirectory = ({ type }) => {
             {
                 tasks.length === 0 && <NoTask type = {type}/>
             }
-        </div>
+        </TaskDirectoryContainer>
     );
 };
 

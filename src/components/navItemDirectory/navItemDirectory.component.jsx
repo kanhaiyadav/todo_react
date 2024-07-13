@@ -1,10 +1,10 @@
 import React from "react";
-import "./navItemDirectory.styles.scss";
+import { ItemsContainer } from "./navItemDirectory.styles";
 import NavItem from "../navItem/navItem.component";
 
 const NavItemDirectory = ({items}) => {
     return (
-        <div className="nav-item-directory">
+        <ItemsContainer>
             {
                 items.map((item, index) => (
                     <NavItem
@@ -16,7 +16,7 @@ const NavItemDirectory = ({items}) => {
                     </NavItem>
                 ))
             }
-        </div>
+        </ItemsContainer>
     
     )
 }

@@ -1,18 +1,22 @@
 import React from "react";
-import './FormTextarea.styles.scss';
+import { FormInputContainer } from "../FormInput/FormInput.styles";
 
-const FormTextarea = ({name, rows, placeholder, required, onChange, value}) => {
+const FormTextarea = ({ name, rows, placeholder, required, onChange, value, autoFocus }) => {
     return (
-        <div className="form-textarea" >
-            <textarea
-                name={name}
-                rows={rows}
-                placeholder={placeholder}
-                required={required}
-                onChange={onChange}
-                value={value}
-            />
-        </div>
+        <FormInputContainer
+            as='textarea'
+            name={name}
+            rows={rows}
+            placeholder={placeholder}
+            required={required}
+            onChange={onChange}
+            value={value}
+            style={{
+                flexGrow: "1",
+                flexBasis: "100%",
+            }}
+            autoFocus={autoFocus}
+        />
     )
 }
 

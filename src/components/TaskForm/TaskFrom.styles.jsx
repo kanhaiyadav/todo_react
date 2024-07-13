@@ -1,4 +1,6 @@
-form#add-task{
+import styled from "styled-components";
+
+export const Form = styled.form`
     width: 94%;
     display: flex;
     flex-direction: row;
@@ -6,14 +8,6 @@ form#add-task{
     justify-content: space-between;
     gap: 20px;
     align-items: center;
-    div.form-textarea{
-        flex-grow: 1;
-        flex-basis: 100%;
-    }
-    div.form-input{
-        flex-grow: 0.5;
-        width: 45%;
-    }
     div.buttons{
         flex-grow: 1;
         display: flex;
@@ -21,4 +15,4 @@ form#add-task{
         justify-content: center;
         gap: 20px;
     }
-}
+`

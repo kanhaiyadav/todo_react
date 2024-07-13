@@ -2,7 +2,6 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout.component';
 import HomeLayout from './Pages/HomeLayout/HomeLayout.component';
-import TaskList from './components/TaskList/TaskList.component';
 import TaskDirectory from './components/TaskDirectory/TaskDirectory.component';
 import SignUpPage from './Pages/SignUpPage/SignUpPage.component';
 import SignInPage from './Pages/SingInPage/SignInPage.component';
@@ -20,6 +19,8 @@ function App() {
                     <Route path='deleted' element={<TaskDirectory type="deleted" />} />
                     <Route path='late' element={<TaskDirectory type="late" />} />
                 </Route>
+                <Route path="profile" element={<HomeLayout />} />
+                <Route path="upgrade" element={<HomeLayout />} />
             </Route>
         </Routes>
     )

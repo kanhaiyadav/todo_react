@@ -1,9 +1,10 @@
-@import "../../mixin";
-@import "../../variables.scss";
-.home-nav-item {
+import { styled } from "styled-components";
+import { NavLink } from "react-router-dom";
+
+export const HomeNavItemContainer = styled(NavLink)`   
     text-decoration: none;
     color: black;
-    border-radius: $base-border-radius*1.5;
+    border-radius: ${({ theme }) => theme.space.base(3)};
     padding: 8px 10px;
     &:hover {
         background-color: white;
@@ -13,4 +14,4 @@
     &:active {
         transform: scale(0.95);
     }
-}
+`

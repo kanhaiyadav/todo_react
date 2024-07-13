@@ -1,15 +1,15 @@
 import React from "react";
-import "./main.styles.scss";
+import { MainContainer } from "./mainContainer";
 
-const Main = ({className, children, style}) => {
+const Main = ({children, style}) => {
     return (
-        <main className={className}
+        <MainContainer
             style={style}
         >
             {
                 children
             }
-        </main>
+        </MainContainer>
     )
 }
 

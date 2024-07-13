@@ -1,18 +1,16 @@
 import React from "react";
-import "./SignInUP-input.styles.scss";
-import { useSelector } from "react-redux";
+import { InputContainer, Label, Input } from "./SignInUp-input.styles";
 
 const SignInUpInput = ({ type, name, required, onChange, value, autoFocus, label }) => {
     return (
-        <div className="SignInUp-input"
-        >
-            <input type={type} name={name} required={required} onChange={onChange} value={value} autoFocus={autoFocus}
+        <InputContainer>
+            <Input type={type} name={name} required={required} onChange={onChange} value={value} autoFocus={autoFocus}
                 style={value ? {
                     border: "1px solid #EE7214",
                     backgroundColor: "#fff78a63",
-                }:null}
+                } : null}
             />
-            <label
+            <Label
                 htmlFor={name}
                 style={value ? {
                     zIndex: "1",
@@ -23,8 +21,10 @@ const SignInUpInput = ({ type, name, required, onChange, value, autoFocus, label
                     borderRadius: "5px",
                 } : null
                 }
-            >{label}</label>
-        </div>
+            >
+                {label}
+            </Label>
+        </InputContainer>
     )
 }
 
