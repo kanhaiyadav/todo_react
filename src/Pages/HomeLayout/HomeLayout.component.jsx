@@ -51,8 +51,8 @@ const HomeLayout = () => {
                 }}
             >
                 <HomeNavItem link=".">Tasks</HomeNavItem>
+                <HomeNavItem link="important">Important</HomeNavItem>
                 <HomeNavItem link="completed">Completed</HomeNavItem>
-                <HomeNavItem link="deleted">Deleted</HomeNavItem>
                 <HomeNavItem link="late">Late</HomeNavItem>
                 <CustomButton
                     type="button"

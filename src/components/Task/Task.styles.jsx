@@ -3,28 +3,16 @@ import { styled, css } from "styled-components";
 const dueStyles = css`
     border: 2px solid ${({ theme }) => theme.colors.secondary};
     background-color: ${({ theme }) => theme.colors.secondary};
-    text-decoration: none;
-    &:hover {
-        border-color: ${({ theme }) => theme.colors.primary};
-    }
 `;
 
-const completedStyles = css`
-    border: 2px solid #8cff8a63;
-    background-color: #8cff8a63;
-    text-decoration: line-through;
-    &:hover {
-        border-color: black;
-    }
+const importantStyles = css`
+    border: 2px solid #f1fe0064;
+    background-color: #f1fe0064;
 `;
 
-const getTaskStyles = ({ type }) => {
-    switch (type) {
-        case "completed":
-            return completedStyles;
-        default:
-            return dueStyles;
-    }
+const getTaskStyles = ({ important }) => {
+    if (important) return importantStyles;
+    else return dueStyles
 }
 
 export const CheckboxContainer = styled.div`
@@ -62,7 +50,7 @@ export const DescriptionContainer = styled.div`
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        text-decoration: ${({ checkbox_clicked }) => checkbox_clicked ? "line-through" : "none"};
+        text-decoration: ${({ $checkbox_clicked, $due }) => $checkbox_clicked || !$due ? "line-through" : "none"};
         font-family: Open Sans;
         &:hover {
             white-space: normal;
@@ -129,6 +117,7 @@ export const TaskContainer = styled.div`
     cursor: default;
     ${getTaskStyles}
     &:hover {
+        border-color: black;
         ${DeleteTaskButton} {
             visibility: visible;
         }

@@ -7,10 +7,31 @@ export const selectAllTasks = createSelector(
     (task) => task.tasks
 );
 
-export const selectTypicalTasks = (type) => createSelector(
+export const selectDueTasks = createSelector(
     [selectAllTasks],
-    (tasks) => tasks.filter((task) => task.type === type)
-)
+    (tasks) => tasks.filter((task) => task.due)
+);
+
+export const selectTypicalTasks = (type) => {
+    switch (type) {
+        case "important":
+            return createSelector(
+                [selectDueTasks],
+                (tasks) => {
+                    console.log(tasks);
+                    return tasks.filter((task) => task.important)
+                }
+            )
+
+        case "completed":
+            return createSelector(
+                [selectAllTasks],
+                (tasks) => tasks.filter((task) => !task.due)
+            )
+        default:
+            return selectDueTasks;
+    }
+}
 
 export const selectIsLoading = createSelector(
     [selectTask],

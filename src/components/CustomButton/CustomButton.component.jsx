@@ -5,8 +5,8 @@ import { CustomButtonContainer } from "./CustomButton.Styles";
 const CustomButton = ({ onClick, children, type, style,shape, effect}) => {
     return (
         <CustomButtonContainer
-            shape={shape}
-            effect={effect}
+            $shape={shape}
+            $effect={effect}
             onClick={onClick}
             style={style}
             type={type}

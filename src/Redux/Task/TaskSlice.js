@@ -9,9 +9,9 @@ const initialState = {
 
 export const fetchTasks = createAsyncThunk(
     "task/fetchTasks",
-    async ({token, type}) => {
+    async ({token}) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/tasks/list/${type}`, {
+            const response = await fetch(`http://localhost:3000/api/v1/tasks/list`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -105,11 +105,11 @@ export const deleteTask = createAsyncThunk(
     }
 );
 
-export const setTaskType = createAsyncThunk(
-    "task/setTaskType",
-    async ({ id, type }) => {
+export const markAsComplete = createAsyncThunk(
+    "task/markAsComplete",
+    async ({ id }) => {
         try {
-            let responce = await fetch(`http://localhost:3000/api/v1/tasks/set_type/${id}/${type}`)
+            let responce = await fetch(`http://localhost:3000/api/v1/tasks/mark_complete/${id}`)
             if(!responce.ok) {
                 responce = await responce.json();
                 throw new Error(responce.message);
@@ -122,6 +122,26 @@ export const setTaskType = createAsyncThunk(
         }
     }
 );
+
+
+export const markImp = createAsyncThunk(
+    "task/markImp",
+    async ({ id }) => {
+        try {
+            let responce = await fetch(`http://localhost:3000/api/v1/tasks/mark_imp/${id}`)
+            if(!responce.ok) {
+                responce = await responce.json();
+                throw new Error(responce.message);
+            }
+            responce = await responce.json();
+            return responce;
+        }
+        catch (error) {
+            throw (error);
+        }
+    }
+);
+
 
 const TaskSlice = createSlice({
     name: "task",
@@ -191,18 +211,32 @@ const TaskSlice = createSlice({
                 state.error = action.error.message || "Failed to delete task";
             })
         
-            .addCase(setTaskType.pending, (state) => {
+            .addCase(markAsComplete.pending, (state) => {
                 state.isloading = true;
             })
-            .addCase(setTaskType.fulfilled, (state, action) => {
+            .addCase(markAsComplete.fulfilled, (state, action) => {
                 state.isloading = false;
                 state.error = "";
                 const index = state.tasks.findIndex((task) => task._id === action.payload.data.id)
-                state.tasks[index].type = action.payload.data.type;
+                state.tasks[index].due = false;
             })
-            .addCase(setTaskType.rejected, (state, action) => {
+            .addCase(markAsComplete.rejected, (state, action) => {
                 state.isloading = false;
-                state.error = action.error.message || "Failed to update task type";
+                state.error = action.error.message || "Failed to mark the task as complete";
+            })
+
+            .addCase(markImp.pending, (state) => {
+                state.isloading = true;
+            })
+            .addCase(markImp.fulfilled, (state, action) => {
+                state.isloading = false;
+                state.error = "";
+                const index = state.tasks.findIndex((task) => task._id === action.payload.data.id)
+                state.tasks[index].important = !state.tasks[index].important;
+            })
+            .addCase(markImp.rejected, (state, action) => {
+                state.isloading = false;
+                state.error = action.error.message || "Failed to mark the task as important";
             });
     }
 });

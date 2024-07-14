@@ -25,8 +25,8 @@ const inverted = css`
         color: ${({ theme }) => theme.colors.primary};
     }
 `
-const getStyle = ({ shape }) => {
-    switch (shape) {
+const getStyle = ({ $shape }) => {
+    switch ($shape) {
         case "circular":
             return circular
         default:
@@ -34,8 +34,8 @@ const getStyle = ({ shape }) => {
     }
 }
 
-const getEffect = ({ effect }) => {
-    switch (effect) {
+const getEffect = ({ $effect }) => {
+    switch ($effect) {
         case "inverted":
             return inverted
         default:

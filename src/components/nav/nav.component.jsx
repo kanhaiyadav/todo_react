@@ -67,8 +67,8 @@ const Nav = () => {
             {
                 jwt ? 
                     <NavItemContainer as={CustomButton}
-                        shape='regular'
-                        effect='scale'
+                        $shape='regular'
+                        $effect='scale'
                         style={{
                             position: "relative",
                             bottom: '-250px',

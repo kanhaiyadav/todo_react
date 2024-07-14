@@ -10,7 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import GlobalStyle from './components/GlobalStyle';
 
 //toastify
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 //Theme
@@ -24,7 +24,7 @@ root.render(
             <PersistGate persistor={persistor}>
                 <BrowserRouter>
                     <GlobalStyle />
-                    <ThemeProvider theme={theme}>
+                    <ThemeProvider theme={theme} autoClose={5000}>
                         <App />
                     </ThemeProvider>
                     <ToastContainer />

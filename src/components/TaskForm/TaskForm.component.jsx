@@ -45,34 +45,39 @@ const TaskForm = ({ type }) => {
                 token: jwt
             })).unwrap();
 
-        toast.promise(createPromise, {
-            pending: 'Creating task...',
-            success: {
-                render({ data }) {
-                    return data.message
+        toast.promise(createPromise,
+            {
+                pending: 'Creating task...',
+                success: {
+                    render({ data }) {
+                        return data.message
+                    },
                 },
+                error: {
+                    render({ data }) {
+                        return data.message
+                    },
+                }
             },
-            error: {
-                render({ data }) {
-                    return data.message
-                },
+            {
+                position: "bottom-right",
             }
-        })
+        )
     }
     const taskUpdate = (event) => {
         event.preventDefault();
         dispatch(reset());
-        const updatePromise = 
-        dispatch(updateTask({
-            _id: updateTaskId,
-            task: {
-                description: description,
-                category: category,
-                date: date,
-            }
-        })).unwrap();
+        const updatePromise =
+            dispatch(updateTask({
+                _id: updateTaskId,
+                task: {
+                    description: description,
+                    category: category,
+                    date: date,
+                }
+            })).unwrap();
 
-        toast.promise(updatePromise, {      
+        toast.promise(updatePromise, {
             pending: 'Updating task...',
             success: {
                 render({ data }) {

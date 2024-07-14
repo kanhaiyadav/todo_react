@@ -15,8 +15,8 @@ function App() {
                 <Route path='login' element={<SignInPage />} />
                 <Route path='home' element={<HomeLayout />} >
                     <Route index element={<TaskDirectory type="due"/>} />
+                    <Route path='important' element={<TaskDirectory type="important"/>} />
                     <Route path='completed' element={<TaskDirectory type="completed"/>} />
-                    <Route path='deleted' element={<TaskDirectory type="deleted" />} />
                     <Route path='late' element={<TaskDirectory type="late" />} />
                 </Route>
                 <Route path="profile" element={<HomeLayout />} />

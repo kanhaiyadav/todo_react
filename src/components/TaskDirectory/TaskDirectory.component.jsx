@@ -15,12 +15,12 @@ const TaskDirectory = ({ type }) => {
     const dispatch = useDispatch();
     const token = useSelector(selectJwt);
     useEffect(() => {
-        dispatch(fetchTasks({ token, type }));
-    }, [dispatch, token, type]);
+        dispatch(fetchTasks({ token}));
+    }, [dispatch, token]);
 
     const tasks = useSelector(selectTypicalTasks(type));
     // console.log(tasks);
-    
+
     return (
         <TaskDirectoryContainer>
             {
@@ -31,12 +31,14 @@ const TaskDirectory = ({ type }) => {
                         description={task.description}
                         category={task.category}
                         date={task.date}
-                        type= {task.type}
+                        type={type}
+                        due={task.due}
+                        important={task.important}
                     />
                 ))
             }
             {
-                tasks.length === 0 && <NoTask type = {type}/>
+                tasks.length === 0 && <NoTask type={type} />
             }
         </TaskDirectoryContainer>
     );

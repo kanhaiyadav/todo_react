@@ -1,23 +1,22 @@
 import React from "react";
 // import './Task.styles.scss';
-import { TaskContainer, DeleteTaskButton, CheckboxContainer,    TaskBody, DescriptionContainer, DateContainer, CategoryContainer } from "./Task.styles";
+import { TaskContainer, DeleteTaskButton, CheckboxContainer, TaskBody, DescriptionContainer, DateContainer, CategoryContainer } from "./Task.styles";
 import { useDispatch } from "react-redux";
 import { setDisplay } from "../../Redux/TaskForm/TaskFormSlice";
 import { setCategory, setDate, setDescription, setUpdateTaskId } from "../../Redux/TaskForm/TaskFormSlice";
 import { useState } from "react";
-import { deleteTask } from "../../Redux/Task/TaskSlice";
+import { deleteTask, markImp, markAsComplete } from "../../Redux/Task/TaskSlice";
 import { toast } from "react-toastify";
 import completedSound from "../../assets/new-notification-on-your-device-138695.mp3"
-import { setTaskType } from "../../Redux/Task/TaskSlice";
 import CustomButton from "../CustomButton/CustomButton.component";
 
-const Task = ({ id, description, category, date, type, style }) => {
+const Task = ({ id, description, category, date, type, style, due, important }) => {
+    console.log(important);
     const audio = new Audio(completedSound);
     const dispatch = useDispatch();
     const [hover, setHover] = useState(false);
     const [checkbox_clicked, setCheckbox_clicked] = useState(false);
     const [soundPlayed, setSoundPlayed] = useState(false);
-    const [imp, setImp] = useState(false);
 
     const handleClick = () => {
         dispatch(setDisplay(false));
@@ -31,15 +30,20 @@ const Task = ({ id, description, category, date, type, style }) => {
         event.stopPropagation();
         const deletePromise = dispatch(deleteTask(id));
 
-        toast.promise(deletePromise, {
-            pending: 'Deleting task...',
-            success: "Task deleted successfully",
-            error: {
-                render({ data }) {
-                    return data.message
+        toast.promise(deletePromise,
+            {
+                pending: 'Deleting task...',
+                success: "Task deleted successfully",
+                error: {
+                    render({ data }) {
+                        return data.message
+                    },
                 },
             },
-        })
+            {
+                position: "bottom-right",
+            }
+        )
     }
 
 
@@ -51,7 +55,7 @@ const Task = ({ id, description, category, date, type, style }) => {
 
     return (
         <TaskContainer
-            type={type}
+            $important={important}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             onClick={type !== "completed" ? handleClick : null}
@@ -60,13 +64,14 @@ const Task = ({ id, description, category, date, type, style }) => {
             <DeleteTaskButton onClick={handleDelete}>
                 <i className="fa-solid fa-circle-xmark"></i>
             </DeleteTaskButton>
+
             {
                 type !== "completed" ?
                     <CheckboxContainer
                         onClick={(event) => {
                             event.stopPropagation();
                             setCheckbox_clicked(!checkbox_clicked);
-                            dispatch(setTaskType({ id: id, type: "completed" }));
+                            dispatch(markAsComplete({ id: id }));
                         }}
                     >
                         {
@@ -83,16 +88,15 @@ const Task = ({ id, description, category, date, type, style }) => {
             }
 
             <TaskBody>
-                <DescriptionContainer checkbox_clicked={checkbox_clicked}>
-                    <p>
-                        {description}
-
-                    </p>
+                <DescriptionContainer $checkbox_clicked={checkbox_clicked} $due={due}>
+                    <p>{description}</p>
                 </DescriptionContainer>
+
                 <DateContainer>
                     <i className="fa-solid fa-calendar-days"></i>
                     <p>{date}</p>
                 </DateContainer>
+
                 <CategoryContainer>
                     <span> {category}</span>
                 </CategoryContainer>
@@ -101,17 +105,17 @@ const Task = ({ id, description, category, date, type, style }) => {
             <CustomButton shape="circular" effect="inverted" type='button'
                 onClick={(event) => {
                     event.stopPropagation();
-                    setImp(!imp)
+                    dispatch(markImp({ id: id }));
                 }}
                 style={{
                     width: '40px',
                     height: '40px'
                 }}
             >
-            {
-                imp ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>
-            }
-        </CustomButton>
+                {
+                    important ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>
+                }
+            </CustomButton>
 
         </TaskContainer >
     )
