@@ -9,7 +9,6 @@ import { createSession } from '../../Redux/user/user.slice';
 import { selectEmail, selectPassword } from '../../Redux/SignInUp-form/SignInUp-selector';
 import { reset } from '../../Redux/SignInUp-form/SignInUp-form.slice';
 import { useNavigate } from 'react-router-dom';
-import { selectJwt } from '../../Redux/user/user.selector';
 import { toast } from 'react-toastify';
 import noti_audio from "../../assets/mixkit-message-pop-alert-2354 (1).mp3"
 import error_audio from "../../assets/error.wav"

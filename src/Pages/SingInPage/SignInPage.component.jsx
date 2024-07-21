@@ -2,9 +2,6 @@ import React from 'react';
 import { SignupPageContainer, SocailAuthContainer, SocialAuth } from '../SignUpPage/SignUpPage.styles';
 import SignInForm from '../../components/SignInForm/SignInForm.component';
 import { Link } from 'react-router-dom';
-import LinearColor from '../../components/Loader/loader';
-import { selectIsLoading } from '../../Redux/user/user.selector';
-import { useSelector } from 'react-redux';
 
 const SignInPage = () => {
     return (
