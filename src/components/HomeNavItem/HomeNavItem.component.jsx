@@ -5,7 +5,7 @@ const HomeNavItem = ({ link, children, style }) => {
     const activeStyle = {
         backgroundColor: "#EE7214",
         color: "white",
-        boxShadow: "2px 2px 3px 2px rgba(0, 0, 0, 0.2)",
+        filter: "drop-shadow(3px 3px 2px #414141)",
         ...style
     }
     return (
@@ -13,7 +13,6 @@ const HomeNavItem = ({ link, children, style }) => {
             to={link}
             end
             style={({ isActive }) => isActive ? activeStyle : { ...style }}
-            className={"home-nav-item"}
         >
             {children}
         </HomeNavItemContainer>

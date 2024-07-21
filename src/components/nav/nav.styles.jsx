@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
 export const NavContainer = styled.nav`
@@ -6,7 +7,7 @@ export const NavContainer = styled.nav`
     top: 0;
     left: 0;
     height: 100vh;
-    width: 35px;
+    width: 40px;
     background: transparent;
     z-index: 1000;
     display: flex;
@@ -27,9 +28,15 @@ export const NavContainer = styled.nav`
         display: none;
         white-space: nowrap;
     }
+    .active{
+        border-left: 5px solid #EE7214;
+        box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+        width: 100%;
+    }
 `
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled(Link)`
+    text-decoration: none;
     position: relative;
     background-color: ghostwhite;
     border: 2px solid rgba(82, 81, 81, 0.685);

@@ -10,6 +10,7 @@ export const NoTaskContainer = styled.div`
     img{
         width: 40%;
         object-fit: contain;
+        filter: drop-shadow(5px 5px 10px rgb(0, 0, 0));
     }
     p{
         font-size: 1.1rem;

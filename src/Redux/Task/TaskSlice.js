@@ -84,12 +84,13 @@ export const updateTask = createAsyncThunk(
 
 export const deleteTask = createAsyncThunk(
     "task/deleteTask",
-    async (_id) => {
+    async ({id, token}) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/tasks/delete/${_id}`, {
+            const response = await fetch(`http://localhost:3000/api/v1/tasks/delete/${id}`, {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: token,
                 },
             });
             if(!response.ok) {

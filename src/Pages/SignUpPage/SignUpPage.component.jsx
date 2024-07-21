@@ -2,18 +2,9 @@ import React from 'react';
 import { SignupPageContainer, SocailAuthContainer, SocialAuth } from './SignUpPage.styles';
 import SignUPForm from '../../components/SignUpForm/SignUPForm.component';
 import { Link } from 'react-router-dom';
-import LinearColor from '../../components/Loader/loader';
-import { selectIsLoading } from '../../Redux/user/user.selector';
-import { useSelector } from 'react-redux';
-
 const SignUpPage = () => {
     return (
         <>
-            <div className='loader'>
-                {
-                    useSelector(selectIsLoading) ? <LinearColor /> : null
-                }
-            </div>
             <SignupPageContainer>
                 <SocailAuthContainer>
                     <SocialAuth>

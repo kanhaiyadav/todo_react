@@ -1,10 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { checkLate } from "../../components/Task/TaskUtils";
 
 const selectTask = (state) => state.task;
 
 export const selectAllTasks = createSelector(
     [selectTask],
-    (task) => task.tasks
+    (task) => task.tasks.slice().reverse()
 );
 
 export const selectDueTasks = createSelector(
@@ -14,6 +15,8 @@ export const selectDueTasks = createSelector(
 
 export const selectTypicalTasks = (type) => {
     switch (type) {
+        case "all": 
+            return selectAllTasks;
         case "important":
             return createSelector(
                 [selectDueTasks],
@@ -27,6 +30,11 @@ export const selectTypicalTasks = (type) => {
             return createSelector(
                 [selectAllTasks],
                 (tasks) => tasks.filter((task) => !task.due)
+            )
+        case "late": 
+            return createSelector(
+                [selectDueTasks],
+                (tasks) => tasks.filter((task) => checkLate(new Date(task.date)))
             )
         default:
             return selectDueTasks;

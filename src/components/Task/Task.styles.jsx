@@ -10,8 +10,14 @@ const importantStyles = css`
     background-color: #f1fe0064;
 `;
 
-const getTaskStyles = ({ important }) => {
-    if (important) return importantStyles;
+const lateStyles = css`
+    border: 2px solid red;
+    background: linear-gradient(#ff000063, ${({ theme }) => theme.colors.secondary});
+    `   
+
+const getTaskStyles = ({ $important, $late }) => {
+    if ($late) return lateStyles;
+    if ($important) return importantStyles;
     else return dueStyles
 }
 
@@ -115,6 +121,8 @@ export const TaskContainer = styled.div`
     padding: ${({ theme }) => theme.space.base()} ${({ theme }) => theme.space.base(2)};
     font-size: ${({ theme }) => theme.fontSizes.lg};
     cursor: default;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+    border: 2px solid transparent;
     ${getTaskStyles}
     &:hover {
         border-color: black;

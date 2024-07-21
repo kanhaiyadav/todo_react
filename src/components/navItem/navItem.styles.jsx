@@ -8,7 +8,6 @@ export const NavItemContainer = styled(NavLink)`
     font-size: 1.5rem;
     box-sizing: border-box;
     white-space: nowrap;
-    border-radius: 10px;
     overflow: hidden;
     display: flex;
     flex-direction: row;
@@ -19,7 +18,6 @@ export const NavItemContainer = styled(NavLink)`
         justify-content: baseline;
         background-color: ${({ theme }) => theme.colors.secondary};
         box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
         width: 100%;
     }
     &:active{
@@ -30,5 +28,5 @@ export const NavItemContainer = styled(NavLink)`
         height:25px;
         display: grid;
         place-content: center;
-    }
+    } 
 `

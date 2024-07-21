@@ -2,7 +2,7 @@ import React from "react";
 // import './CustomButton.styles.scss';
 import { CustomButtonContainer } from "./CustomButton.Styles";
 
-const CustomButton = ({ onClick, children, type, style,shape, effect}) => {
+const CustomButton = ({ onClick, children, type, style,shape, effect, disabled}) => {
     return (
         <CustomButtonContainer
             $shape={shape}
@@ -10,6 +10,7 @@ const CustomButton = ({ onClick, children, type, style,shape, effect}) => {
             onClick={onClick}
             style={style}
             type={type}
+            disabled={disabled}
         >
             {children}
         </CustomButtonContainer>

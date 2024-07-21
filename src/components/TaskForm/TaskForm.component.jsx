@@ -11,10 +11,15 @@ import { createTask, updateTask } from "../../Redux/Task/TaskSlice";
 import { selectUpdateTaskId } from "../../Redux/TaskForm/TaskFormSelector";
 import { selectJwt } from "../../Redux/user/user.selector";
 import { toast } from "react-toastify";
+import { checkLate } from "../Task/TaskUtils";
+import audio from "../../assets/mixkit-message-pop-alert-2354 (1).mp3";
+import error_audio from "../../assets/error.wav";
 
 const TaskForm = ({ type }) => {
     const dispatch = useDispatch();
     const jwt = useSelector(selectJwt);
+    const notification = new Audio(audio);
+    const error_notification = new Audio(error_audio);
 
     const handleTextareaChange = (event) => {
         dispatch(setDescription(event.target.value));
@@ -34,6 +39,13 @@ const TaskForm = ({ type }) => {
 
     const taskCreate = (event) => {
         event.preventDefault();
+        if (checkLate(new Date(date))) {
+            toast.error('Date cannot be in the past',{
+                position: "bottom-right",
+            });
+            error_notification.play();
+            return;
+        }
         dispatch(reset());
         const createPromise =
             dispatch(createTask({
@@ -50,11 +62,13 @@ const TaskForm = ({ type }) => {
                 pending: 'Creating task...',
                 success: {
                     render({ data }) {
+                        notification.play();
                         return data.message
                     },
                 },
                 error: {
                     render({ data }) {
+                        error_notification.play();
                         return data.message
                     },
                 }
@@ -81,11 +95,13 @@ const TaskForm = ({ type }) => {
             pending: 'Updating task...',
             success: {
                 render({ data }) {
+                    notification.play();
                     return data.message
                 },
             },
             error: {
                 render({ data }) {
+                    error_notification.play();
                     return data.message
                 },
             }

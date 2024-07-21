@@ -9,11 +9,6 @@ import { useSelector } from 'react-redux';
 const SignInPage = () => {
     return (
         <>
-            <div className='loader'>
-                {
-                    useSelector(selectIsLoading) ? <LinearColor /> : null
-                }
-            </div>
             <SignupPageContainer>
                 <SocailAuthContainer>
                     <SocialAuth>

@@ -25,11 +25,11 @@ const Nav = () => {
                     title: "Profile",
                     icon: "fa-solid fa-user"
                 },
-                {
-                    link: "upgrade",
-                    title: "Upgrade",
-                    icon: "fa-solid fa-dollar-sign"
-                },
+                // {
+                //     link: "upgrade",
+                //     title: "Upgrade",
+                //     icon: "fa-solid fa-dollar-sign"
+                // },
             ],
         general:
             [
@@ -57,7 +57,7 @@ const Nav = () => {
     }
     return (
         <NavContainer>
-            <HeaderContainer>
+            <HeaderContainer to={"/home"}>
                 <img src={favicon} alt="" />
                 <span>ToDo</span>
             </HeaderContainer>

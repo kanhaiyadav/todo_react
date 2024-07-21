@@ -50,7 +50,8 @@ const HomeLayout = () => {
                     gap: "50px"
                 }}
             >
-                <HomeNavItem link=".">Tasks</HomeNavItem>
+                <HomeNavItem link="all">All</HomeNavItem>
+                <HomeNavItem link=".">Due</HomeNavItem>
                 <HomeNavItem link="important">Important</HomeNavItem>
                 <HomeNavItem link="completed">Completed</HomeNavItem>
                 <HomeNavItem link="late">Late</HomeNavItem>

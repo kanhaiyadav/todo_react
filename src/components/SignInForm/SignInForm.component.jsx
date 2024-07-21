@@ -11,6 +11,8 @@ import { reset } from '../../Redux/SignInUp-form/SignInUp-form.slice';
 import { useNavigate } from 'react-router-dom';
 import { selectJwt } from '../../Redux/user/user.selector';
 import { toast } from 'react-toastify';
+import noti_audio from "../../assets/mixkit-message-pop-alert-2354 (1).mp3"
+import error_audio from "../../assets/error.wav"
 
 const SignInForm = () => {
     const dispatch = useDispatch();
@@ -24,9 +26,12 @@ const SignInForm = () => {
         dispatch(setPassword(event.target.value));
     }
 
-    const jwt = useSelector(selectJwt);
     const email = useSelector(selectEmail);
     const password = useSelector(selectPassword);
+
+    const notification = new Audio(noti_audio);
+    const error_notification = new Audio(error_audio);
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -40,20 +45,20 @@ const SignInForm = () => {
             pending: 'Logging in...',
             success: {
                 render({ data }) {
+                    navigate('/home');
+                    dispatch(reset());
+                    notification.play();
                     return data.message
                 },
             },
             error: {
                 render({ data }) {
+                    error_notification.play();
+                    navigate('/login');
                     return data.message
                 },
             }
         })
-        dispatch(reset());
-    }
-
-    if (jwt) {
-        navigate('/home');
     }
     return (
         <Main

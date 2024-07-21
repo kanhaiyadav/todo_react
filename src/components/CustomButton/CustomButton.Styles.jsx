@@ -38,8 +38,10 @@ const getEffect = ({ $effect }) => {
     switch ($effect) {
         case "inverted":
             return inverted
-        default:
+        case "scale":
             return scale
+        default:
+            return null
     }
 }
 
@@ -55,6 +57,8 @@ export const CustomButtonContainer = styled.button`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(2px 2px 3px rgb(0, 0, 0));
+
     ${getStyle}
     ${getEffect}
 `

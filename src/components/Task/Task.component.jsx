@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import './Task.styles.scss';
 import { TaskContainer, DeleteTaskButton, CheckboxContainer, TaskBody, DescriptionContainer, DateContainer, CategoryContainer } from "./Task.styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setDisplay } from "../../Redux/TaskForm/TaskFormSlice";
 import { setCategory, setDate, setDescription, setUpdateTaskId } from "../../Redux/TaskForm/TaskFormSlice";
 import { useState } from "react";
@@ -9,14 +9,25 @@ import { deleteTask, markImp, markAsComplete } from "../../Redux/Task/TaskSlice"
 import { toast } from "react-toastify";
 import completedSound from "../../assets/new-notification-on-your-device-138695.mp3"
 import CustomButton from "../CustomButton/CustomButton.component";
+import { checkLate } from "./TaskUtils";
+import noti_audio from "../../assets/mixkit-message-pop-alert-2354 (1).mp3";
+import { selectJwt } from "../../Redux/user/user.selector";
 
 const Task = ({ id, description, category, date, type, style, due, important }) => {
-    console.log(important);
+
+    const notification = new Audio(noti_audio);
     const audio = new Audio(completedSound);
     const dispatch = useDispatch();
     const [hover, setHover] = useState(false);
     const [checkbox_clicked, setCheckbox_clicked] = useState(false);
     const [soundPlayed, setSoundPlayed] = useState(false);
+    const [late, setLate] = useState(false);
+    const jwt = useSelector(selectJwt);
+
+    useEffect(() => {
+        setLate(checkLate(new Date(date)));
+    }, [date])
+
 
     const handleClick = () => {
         dispatch(setDisplay(false));
@@ -28,7 +39,7 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
 
     const handleDelete = (event) => {
         event.stopPropagation();
-        const deletePromise = dispatch(deleteTask(id));
+        const deletePromise = dispatch(deleteTask({id: id, token: jwt}));
 
         toast.promise(deletePromise,
             {
@@ -44,6 +55,7 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
                 position: "bottom-right",
             }
         )
+        notification.play();
     }
 
 
@@ -56,6 +68,7 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
     return (
         <TaskContainer
             $important={important}
+            $late={late}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
             onClick={type !== "completed" ? handleClick : null}
@@ -102,21 +115,34 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
                 </CategoryContainer>
             </TaskBody>
 
-            <CustomButton shape="circular" effect="inverted" type='button'
-                onClick={(event) => {
-                    event.stopPropagation();
-                    dispatch(markImp({ id: id }));
-                }}
-                style={{
-                    width: '40px',
-                    height: '40px'
-                }}
-            >
-                {
-                    important ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>
-                }
-            </CustomButton>
-
+            {
+                type !== "completed" ?
+                    <CustomButton shape="circular" effect="inverted" type='button'
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            dispatch(markImp({ id: id }));
+                        }}
+                        style={{
+                            width: '40px',
+                            height: '40px'
+                        }}
+                    >
+                        {
+                            important ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>
+                        }
+                    </CustomButton>
+                    :
+                    <CustomButton shape="circular" type='button' disabled={true}
+                        style={{
+                            width: '40px',
+                            height: '40px'
+                        }}
+                    >
+                        {
+                            important ? <i className="fa-solid fa-star"></i> : <i className="fa-regular fa-star"></i>
+                        }
+                    </CustomButton>
+            }
         </TaskContainer >
     )
 }
