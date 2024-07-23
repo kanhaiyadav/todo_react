@@ -64,23 +64,19 @@ const Nav = () => {
             <NavItemDirectory items={state.user} />
             <hr />
             <NavItemDirectory items={state.general} />
-            {
-                jwt ? 
-                    <NavItemContainer as={CustomButton}
-                        $shape='regular'
-                        $effect='scale'
-                        style={{
-                            position: "relative",
-                            bottom: '-250px',
-                            width: "90%",
-                        }}
-                        onClick={handleClick}
-                    >
-                        <div><i className="fa-solid fa-right-from-bracket"></i></div>
-                        <span>Logout</span>
-                    </NavItemContainer>
-                : null
-            }
+            <NavItemContainer as={CustomButton}
+                $shape='regular'
+                $effect='scale'
+                style={{
+                    position: "relative",
+                    bottom: '-250px',
+                    width: "90%",
+                }}
+                onClick={handleClick}
+            >
+                <div><i className="fa-solid fa-right-from-bracket"></i></div>
+                <span>Logout</span>
+            </NavItemContainer>
         </NavContainer>
     )
 }

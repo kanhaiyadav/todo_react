@@ -107,6 +107,31 @@ export const changeUsername = createAsyncThunk(
     }
 )
 
+
+export const DeleteUser = createAsyncThunk(
+    "user/DeleteUser",
+    async ({ token }) => {
+        try {
+            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/delete", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token,
+                },
+            });
+            if (!response.ok) {
+                response = await response.json();
+                throw new Error(response.message);
+            }
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+            throw (error);
+        }
+    }
+)
+
+
 const UserSlice = createSlice({
     name: "user",
     initialState,
@@ -177,6 +202,18 @@ const UserSlice = createSlice({
         .addCase(changeUsername.rejected, (state, action) => {
             state.isloading = false;
             state.error = action.error.message || "Failed to change username";
+        })
+        .addCase(DeleteUser.pending, (state) => {
+            state.isloading = true;
+        })
+        .addCase(DeleteUser.fulfilled, (state, action) => {
+            state.isloading = false;
+            state.error = "";
+            state.user = null;
+        })
+        .addCase(DeleteUser.rejected, (state, action) => {
+            state.isloading = false;
+            state.error = action.error.message || "Failed to delete user";
         })
     },
 });
