@@ -9,7 +9,7 @@ export const TaskDirectoryContainer = styled.div`
     align-items: center;
     overflow: hidden;
     overflow-x: hidden;
-    padding-top: 10px;
+    padding-top: ${({ theme }) => theme.space.base(2)};
     &:hover {
         overflow: auto;
     }

@@ -1,4 +1,5 @@
 import { styled, css } from "styled-components";
+import { flexCenter } from "../../styles/mixins";
 
 const dueStyles = css`
     border: 2px solid ${({ theme }) => theme.colors.secondary};
@@ -6,8 +7,8 @@ const dueStyles = css`
 `;
 
 const importantStyles = css`
-    border: 2px solid #f1fe0064;
-    background-color: #f1fe0064;
+    border: 2px solid ${({ theme }) => theme.colors.impColor};
+    background-color: ${({ theme }) => theme.colors.impColor};
 `;
 
 const lateStyles = css`
@@ -23,17 +24,15 @@ const getTaskStyles = ({ $important, $late }) => {
 
 export const CheckboxContainer = styled.div`
     justify-self: center;
-    display: grid;
-    place-items: center;
+    ${flexCenter};
     height: 20px;
     z-index: 123400000;
 `
 
 export const DeleteTaskButton = styled.div`
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background-color: white;
+    ${flexCenter};
+    border-radius: ${({ theme }) => theme.radii.circle};
+    background-color:${({ theme }) => theme.colors.textColor === 'white' ? 'black' : 'white'};
     position: absolute;
     top: -10px;
     right: -10px;
@@ -41,6 +40,7 @@ export const DeleteTaskButton = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.xl};
     visibility: hidden;
     i{
+        color: ${({ theme }) => theme.colors.textColor};
         &:hover{
             color: red;
         }
@@ -51,13 +51,13 @@ export const DescriptionContainer = styled.div`
     display: grid;
     grid-template-columns: 0.95fr 0.05fr;
     p{
-        padding: 0px 10px;
+        padding: 0px ${({ theme }) => theme.space.base(2)};
         position: relative;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         text-decoration: ${({ $checkbox_clicked, $due }) => $checkbox_clicked || !$due ? "line-through" : "none"};
-        font-family: Open Sans;
+        font-family: ${({ theme }) => theme.fontFamily.secondary};
         &:hover {
             white-space: normal;
         }
@@ -65,7 +65,7 @@ export const DescriptionContainer = styled.div`
     i {
         font-size: ${({ theme }) => theme.fontSizes.xl};
         color: ${({ theme }) => theme.colors.primary};
-        margin-right: 10px;
+        margin-right: ${({ theme }) => theme.space.base(2)};
     }
 `
 
@@ -75,13 +75,13 @@ export const DateContainer = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.md};
     i {
         color: ${({ theme }) => theme.colors.primary};
-        padding: 0px 10px;
+        padding: 0px ${({ theme }) => theme.space.base(2)};
         display: inline-block;
     }
     >p {
         font-family: "Agency FB";
         color: rgb(77, 77, 77);
-        padding: 5px 0px 0px 0px;
+        padding: ${({ theme }) => theme.space.base()} 0px 0px 0px;
         display: inline-block;
         overflow: hidden;
         white-space: nowrap;
@@ -95,8 +95,8 @@ export const CategoryContainer = styled.p`
     color: ${({ theme }) => theme.colors.primary};
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin: 0px 20px;
-    font-family: Playwrite PE;
+    margin: 0px ${({ theme }) => theme.space.base(4)};
+    font-family: ${({ theme }) => theme.fontFamily.handwriting1};
 `
 
 export const TaskBody = styled.div`
@@ -125,7 +125,7 @@ export const TaskContainer = styled.div`
     border: 2px solid transparent;
     ${getTaskStyles}
     &:hover {
-        border-color: black;
+        border-color: ${({ theme }) => theme.colors.primary};
         ${DeleteTaskButton} {
             visibility: visible;
         }

@@ -1,4 +1,5 @@
 import { styled, css } from "styled-components";
+import { flexCenter, borderOutline } from "../../styles/mixins";
 
 const regular = css`
     border-radius: ${({ theme }) => theme.space.base()};
@@ -15,7 +16,7 @@ const scale = css`
 `
 
 const circular = css`
-    border-radius: 50%;
+    border-radius: ${({ theme }) => theme.radii.circle};
     padding: ${({ theme }) => theme.space.base(2)};
 `
 const inverted = css`
@@ -49,16 +50,12 @@ export const CustomButtonContainer = styled.button`
     background: transparent;
     background-color: ${({ theme }) => theme.colors.primary};
     font-size: ${({ theme }) => theme.fontSizes.lg};
-    font-family: "Arial Narrow", sans-serif;
-    border: none;
-    outline: none;
+    font-family: ${({ theme }) => theme.fontFamily.primary};
+    ${borderOutline}
     color: white;
-    display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    ${flexCenter};
     filter: drop-shadow(2px 2px 3px rgb(0, 0, 0));
-
     ${getStyle}
     ${getEffect}
 `

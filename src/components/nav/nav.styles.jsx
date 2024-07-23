@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { flexCenter } from "../../styles/mixins";
 
 export const NavContainer = styled.nav`
     box-sizing: content-box;
@@ -29,8 +30,7 @@ export const NavContainer = styled.nav`
         white-space: nowrap;
     }
     .active{
-        border-left: 5px solid #EE7214;
-        box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.2);
+        background-color: ${({ theme }) => theme.colors.primary};
         width: 100%;
     }
 `
@@ -38,24 +38,22 @@ export const NavContainer = styled.nav`
 export const HeaderContainer = styled(Link)`
     text-decoration: none;
     position: relative;
-    background-color: ghostwhite;
+    background-color: ${({ theme }) => theme.colors.white};
     border: 2px solid rgba(82, 81, 81, 0.685);
     min-width: 43px;
     width: 100%;
-    border-radius: 10px;
-    padding: 5px;
-    display: flex;
+    border-radius: ${({ theme }) => theme.radii.md};
+    padding: ${({ theme }) => theme.space.base()};
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    ${flexCenter};
     img {
         width: 33px;
     }
     span {
-        font-size: 1.5rem;
+        font-size: ${({ theme }) => theme.fontSizes.xxxl};
         position: relative;
         top: 4px;
-        font-weight: 900;
+        font-weight: ${({ theme }) => theme.fontWeights.black};
         font-style: italic;
         color: #3c4d5d;
         display: none;

@@ -7,7 +7,7 @@ const Settings = () => {
     return (
         <PageContainer>
             <PageSection title={'Appearance'}>
-                <CustomButton style={{backgroundColor: 'green'}}>Change Theme</CustomButton>
+                <CustomButton effect={'scale'} style={{ backgroundColor: 'green' }}>Change Theme&nbsp;&nbsp;<i className="fa-solid fa-caret-down"></i></CustomButton>
             </PageSection>
         </PageContainer>
     )

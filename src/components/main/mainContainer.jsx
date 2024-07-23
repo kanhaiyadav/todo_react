@@ -5,9 +5,9 @@ export const MainContainer = styled.main`
     flex-direction: column;
     align-items: center;
     position: relative;
-    border-radius: 20px;
+    border-radius: ${({ theme }) => theme.radii.xl};
     padding:  ${({theme}) => theme.space.base(3.5)};
-    background-color: rgba(200, 200, 200, 0.662);
-    box-shadow: 0px 0px 2px 2px rgba(200, 200, 200, 0.662);
+    background-color: ${({ theme }) => theme.mainDiv.color};
+    box-shadow: ${({ theme }) => theme.mainDiv.shadow};
     transition:0.3s ease-in-out;
 `

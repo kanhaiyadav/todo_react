@@ -1,13 +1,12 @@
 import styled from "styled-components";
+import { flexCenter } from "../../styles/mixins";
 
 export const SignUpFormContainer = styled.div`
     position: relative;
     width: 100%;
-    border-radius: $base-border-radius;
+    border-radius: ${({ theme }) => theme.radii.lg};
     position: relative;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    ${flexCenter};
     gap: 30px;
 `

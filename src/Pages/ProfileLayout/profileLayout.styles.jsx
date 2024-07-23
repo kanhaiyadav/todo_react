@@ -23,11 +23,11 @@ export const TaskInfo = styled.div`
     gap: 25px;
     margin-top: 10px;
     p{
-        color: #ee754e;
+        color: ${({ theme }) => theme.colors.primary};;
         font-family: Playwrite AU TAS;
         span{
             font-weight: bold;
-            color: #2b2b2b
+            color: ${({ theme }) => theme.colors.textColor};
         }
     }
 `
@@ -35,26 +35,26 @@ export const ProgressBarContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: ${({ theme }) => theme.space.base(2)};
     div{
         width: 110px;
         height: 110px;
     }
     i{
-        color: #2b2b2b;
-        /* border: 1px solid #2b2b2b; */
-        padding: 5px 10px;
-        border-radius: 5px;
+        color: ${({ theme }) => theme.colors.textColor};
+        padding: ${({ theme }) => theme.space.base()} ${({ theme }) => theme.space.base(2)};
+        border-radius: ${({ theme }) => theme.radii.sm};
         box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
     }
 `
 
 export const UserInfo = styled.div`
+    color: ${({ theme }) => theme.colors.textColor};
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
     align-items: flex-start;
-    gap:5px;
+    gap:${({ theme }) => theme.space.base()};
 `
 
 export const NavContainer = styled.div`
@@ -63,11 +63,14 @@ export const NavContainer = styled.div`
     align-items: center;
     justify-content: baseline;
     width: 100%;
-    gap: 20px;
+    gap: ${({ theme }) => theme.space.base(4)};
+    .active{
+        background-color: ${({ theme }) => theme.colors.primary};
+    }
 `
 
 export const MainContainer = styled(Main)`
     height: 94vh;
     /* width: 50%; */
-    gap: 20px;
+    gap: ${({ theme }) => theme.space.base(4)};
 `

@@ -56,7 +56,7 @@ const Account = () => {
             </PageSection>
             <PageSection title={'Delete Your Account'}>
                 <p>Once you delete your account you won't be able to recover it</p>
-                <CustomButton style={{ backgroundColor: 'red' }} onClick={handleDeleteUser}>Delete Account</CustomButton>
+                <CustomButton effect={'scale'} style={{ backgroundColor: 'red' }} onClick={handleDeleteUser}>Delete Account</CustomButton>
             </PageSection>
         </PageContainer>
     )

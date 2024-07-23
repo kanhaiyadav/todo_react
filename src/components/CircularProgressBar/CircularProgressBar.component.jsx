@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { BarContainer, ProgressBar } from './CircularProgressBar.styles';
+import { useTheme } from 'styled-components';
+
 const CircularProgressBar = ({ start, end}) => {
     const [percentage, setPercentage] = useState(start);
+    const theme = useTheme();
     useEffect(() => {
         const progress = setInterval(() => {
             setPercentage(prev => {
@@ -19,7 +22,7 @@ const CircularProgressBar = ({ start, end}) => {
     return (
       <BarContainer>
           <ProgressBar style={{
-              background: `conic-gradient(#EE754e ${percentage*3.6}deg, transparent 0deg)`
+              background: `conic-gradient(${theme.colors.primary} ${percentage*3.6}deg, transparent 0deg)`
           }}>
               <span>{percentage}%</span>
           </ProgressBar>

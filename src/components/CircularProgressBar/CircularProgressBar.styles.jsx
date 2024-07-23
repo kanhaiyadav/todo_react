@@ -5,22 +5,23 @@ export const ProgressBar = styled.div`
     height: 100%;
     position: relative;
     box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
+    border-radius: ${({ theme }) => theme.radii.circle};
     display: flex;
     justify-content: center;
     align-items: center;
     span{
+        color: ${({ theme }) => theme.colors.textColor};
         z-index: 100;
-        font-size: 1.5rem;
+        font-size: ${({ theme }) => theme.fontSizes.xxxl};
     }
     &::before{
         content: "";
         position: absolute;
         width: 84%;
         height: 84%;
-        background-color: #d2d2d2;
+        background-color: ${({ theme }) => theme.colors.pbarColor};;
         box-shadow: inset 2px 2px 8px 2px rgba(0, 0, 0, 0.2);
-        border-radius: 50%;
+        border-radius: ${({ theme }) => theme.radii.circle};
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);

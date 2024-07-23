@@ -64,19 +64,29 @@ const Nav = () => {
             <NavItemDirectory items={state.user} />
             <hr />
             <NavItemDirectory items={state.general} />
+            <div
+                style={{
+                    flexGrow: '1',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'end',
+                }}
+            >
             <NavItemContainer as={CustomButton}
                 $shape='regular'
                 $effect='scale'
                 style={{
                     position: "relative",
-                    bottom: '-250px',
                     width: "90%",
+                    marginBottom: "20px",
+                    padding: '5px',
                 }}
                 onClick={handleClick}
             >
-                <div><i className="fa-solid fa-right-from-bracket"></i></div>
+            <i className="fa-solid fa-right-from-bracket"></i>
                 <span>Logout</span>
             </NavItemContainer>
+            </div>
         </NavContainer>
     )
 }
