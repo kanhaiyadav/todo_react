@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
     "user/register",
     async (user) => {
         try {
-            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/register", {
+            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export const createSession = createAsyncThunk(
     "user/createSession",
     async (user) => {
         try {
-            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/login", {
+            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/login", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export const verify = createAsyncThunk(
     "user/verify",
     async (token) => {
         try {
-            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/verify", {
+            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/verify", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -84,6 +84,29 @@ export const verify = createAsyncThunk(
     }
 )
 
+export const changeUsername = createAsyncThunk(
+    "user/changeUsername",
+    async ({ token, username }) => {
+        try {
+            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/change_username", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token,
+                },
+                body: JSON.stringify({ username }),
+            });
+            if (!response.ok) {
+                response = await response.json();
+                throw new Error(response.message);
+            }
+            return await response.json();
+        } catch (error) {
+            throw (error);
+        }
+    }
+)
+
 const UserSlice = createSlice({
     name: "user",
     initialState,
@@ -93,6 +116,15 @@ const UserSlice = createSlice({
         },
         setJwt: (state, action) => {
             state.jwt = action.payload;
+        },
+        incCreatedTasks: (state) => {
+            state.user.taskCreated++;
+        },
+        incDeletedTasks: (state) => {
+            state.user.taskDeleted++;
+        },
+        incCompletedTasks: (state) => {
+            state.user.taskCompleted++;
         },
     },
     extraReducers: (builder) => {
@@ -133,9 +165,21 @@ const UserSlice = createSlice({
                 state.isloading = false;
                 state.jwt = "";
                 state.error = action.error.message || "failed to varify";
-            });
+            })
+        .addCase(changeUsername.pending, (state) => {
+            state.isloading = true; 
+        })
+        .addCase(changeUsername.fulfilled, (state, action) => {
+            state.isloading = false;
+            state.error = "";
+            state.user.name = action.payload.data.name;
+        })
+        .addCase(changeUsername.rejected, (state, action) => {
+            state.isloading = false;
+            state.error = action.error.message || "Failed to change username";
+        })
     },
 });
 
-export const { setUser, setJwt } = UserSlice.actions;
+export const { setUser, setJwt, incCreatedTasks, incDeletedTasks, incCompletedTasks } = UserSlice.actions;
 export default UserSlice.reducer;

@@ -2,26 +2,16 @@ import React from 'react'
 import { PageContainer } from './Account.styles'
 import PageSection from '../../../components/PageSection/PageSection.component'
 import CustomButton from '../../../components/CustomButton/CustomButton.component'
+import UsernameForm from './UsernameForm/UsernameForm.component'
 
 const Account = () => {
+
     return (
         <PageContainer>
             <PageSection title={'Edit Profile'}>
-                <div style={{width:'100%'}}>
+                <div style={{ width: '100%' }}>
                     <p>Change Your username: </p>
-                    <input
-                        style={{
-                            width: '50%',
-                            border: '1px solid black',
-                            borderRadius: '5px',
-                            padding: '5px',
-                            marginBottom: '5px',
-                            marginTop: '5px',
-                            background: 'transparent',
-                            fontSize: '1.3rem'
-                        }}
-                    ></input>
-                    <CustomButton style={{ backgroundColor: 'green' }}>Done</CustomButton>
+                    <UsernameForm />
                 </div>
             </PageSection>
             <PageSection title={'Delete Your Account'}>
@@ -32,4 +22,4 @@ const Account = () => {
     )
 }
 
-export default Account
+export default React.memo(Account);

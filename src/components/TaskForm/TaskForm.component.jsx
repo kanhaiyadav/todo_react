@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { checkLate } from "../Task/TaskUtils";
 import audio from "../../assets/mixkit-message-pop-alert-2354 (1).mp3";
 import error_audio from "../../assets/error.wav";
+import { incCreatedTasks } from "../../Redux/user/user.slice";
 
 const TaskForm = ({ type }) => {
     const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const TaskForm = ({ type }) => {
                 },
                 token: jwt
             })).unwrap();
+        dispatch(incCreatedTasks());
 
         toast.promise(createPromise,
             {

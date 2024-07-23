@@ -12,6 +12,7 @@ import CustomButton from "../CustomButton/CustomButton.component";
 import { checkLate } from "./TaskUtils";
 import noti_audio from "../../assets/mixkit-message-pop-alert-2354 (1).mp3";
 import { selectJwt } from "../../Redux/user/user.selector";
+import { incCompletedTasks, incDeletedTasks } from "../../Redux/user/user.slice";
 
 const Task = ({ id, description, category, date, type, style, due, important }) => {
 
@@ -39,7 +40,8 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
 
     const handleDelete = (event) => {
         event.stopPropagation();
-        const deletePromise = dispatch(deleteTask({id: id, token: jwt}));
+        const deletePromise = dispatch(deleteTask({ id: id, token: jwt }));
+        dispatch(incDeletedTasks());
 
         toast.promise(deletePromise,
             {
@@ -84,7 +86,8 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
                         onClick={(event) => {
                             event.stopPropagation();
                             setCheckbox_clicked(!checkbox_clicked);
-                            dispatch(markAsComplete({ id: id }));
+                            dispatch(markAsComplete({ id: id, token: jwt }));
+                            dispatch(incCompletedTasks());
                         }}
                     >
                         {

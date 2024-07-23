@@ -4,6 +4,9 @@ const initialState = {
     isloading: false,
     tasks: [],
     error: "",
+    taskCreated: 0,
+    taskCompleted: 0,
+    taskDeleted: 0
 };
 
 
@@ -11,7 +14,7 @@ export const fetchTasks = createAsyncThunk(
     "task/fetchTasks",
     async ({token}) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/v1/tasks/list`, {
+            const response = await fetch(process.env.REACT_APP_BASE_URL + `/api/v1/tasks/list`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -23,7 +26,7 @@ export const fetchTasks = createAsyncThunk(
                 throw new Error(responce.message);
             }
             const data = await response.json();
-            return data.tasks;
+            return data;
         }catch (error) {
             throw (error);
         }
@@ -34,7 +37,7 @@ export const createTask = createAsyncThunk(
     "task/createTask",
     async ({ task, token }) => {
         try {
-            const response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/tasks/create", {
+            const response = await fetch(process.env.REACT_APP_BASE_URL+"/api/v1/tasks/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,7 +65,7 @@ export const updateTask = createAsyncThunk(
     "task/updateTask",
     async ({ _id, task }) => {
         try {
-            const response = await fetch(`https://serverfortodoreactapp.onrender.com/api/v1/tasks/update/${_id}`, {
+            const response = await fetch(process.env.REACT_APP_BASE_URL +`/api/v1/tasks/update/${_id}`, {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -86,7 +89,7 @@ export const deleteTask = createAsyncThunk(
     "task/deleteTask",
     async ({id, token}) => {
         try {
-            const response = await fetch(`https://serverfortodoreactapp.onrender.com/api/v1/tasks/delete/${id}`, {
+            const response = await fetch(process.env.REACT_APP_BASE_URL +`/api/v1/tasks/delete/${id}`, {
                 method: "delete",
                 headers: {
                     "Content-Type": "application/json",
@@ -108,9 +111,15 @@ export const deleteTask = createAsyncThunk(
 
 export const markAsComplete = createAsyncThunk(
     "task/markAsComplete",
-    async ({ id }) => {
+    async ({ id, token }) => {
         try {
-            let responce = await fetch(`https://serverfortodoreactapp.onrender.com/api/v1/tasks/mark_complete/${id}`)
+            let responce = await fetch(process.env.REACT_APP_BASE_URL + `/api/v1/tasks/mark_complete/${id}`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: token,
+                },
+            })
             if(!responce.ok) {
                 responce = await responce.json();
                 throw new Error(responce.message);
@@ -129,7 +138,7 @@ export const markImp = createAsyncThunk(
     "task/markImp",
     async ({ id }) => {
         try {
-            let responce = await fetch(`https://serverfortodoreactapp.onrender.com/api/v1/tasks/mark_imp/${id}`)
+            let responce = await fetch(process.env.REACT_APP_BASE_URL +`/api/v1/tasks/mark_imp/${id}`)
             if(!responce.ok) {
                 responce = await responce.json();
                 throw new Error(responce.message);
@@ -162,7 +171,7 @@ const TaskSlice = createSlice({
             .addCase(fetchTasks.fulfilled, (state, action) => {
                 state.isloading = false;
                 state.error = "";
-                state.tasks = action.payload;
+                state.tasks = action.payload.data.tasks;
             })
             .addCase(fetchTasks.rejected, (state, action) => {
                 state.isloading = false;

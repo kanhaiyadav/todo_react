@@ -10,4 +10,4 @@ const PageSection = ({title, children}) => {
   )
 }
 
-export default PageSection;
+export default React.memo(PageSection);
