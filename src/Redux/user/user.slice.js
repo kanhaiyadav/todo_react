@@ -39,7 +39,7 @@ export const createSession = createAsyncThunk(
     "user/createSession",
     async (user) => {
         try {
-            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/login", {
+            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/login", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export const verify = createAsyncThunk(
     "user/verify",
     async (token) => {
         try {
-            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/verify", {
+            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/verify", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
