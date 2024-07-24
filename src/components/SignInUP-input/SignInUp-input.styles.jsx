@@ -28,7 +28,7 @@ export const Input = styled.input`
         font-size: 0.9rem;
         color: white;
         background-color: ${({ theme }) => theme.colors.primary};
-        border-radius: ${({ theme }) => theme.radii.md};
+        border-radius: ${({ theme }) => theme.radii.sm};
     }
     &:focus{
         border: 1px solid ${({ theme }) => theme.colors.primary};

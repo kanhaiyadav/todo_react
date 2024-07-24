@@ -1,13 +1,15 @@
 import React from "react";
 import { InputContainer, Label, Input } from "./SignInUp-input.styles";
+import { useTheme } from "styled-components";
 
 const SignInUpInput = ({ type, name, required, onChange, value, autoFocus, label }) => {
+    const theme = useTheme();
     return (
         <InputContainer>
             <Input type={type} name={name} required={required} onChange={onChange} value={value} autoFocus={autoFocus}
                 style={value ? {
-                    border: "1px solid #EE7214",
-                    backgroundColor: "#fff78a63",
+                    border: `1px solid ${theme.colors.primary}`,
+                    backgroundColor: `${theme.colors.secondary}`,
                 } : null}
             />
             <Label
@@ -17,7 +19,7 @@ const SignInUpInput = ({ type, name, required, onChange, value, autoFocus, label
                     top: "-3px",
                     fontSize: "0.9rem",
                     color: "white",
-                    backgroundColor: "#EE7214",
+                    backgroundColor: `${theme.colors.primary}`,
                     borderRadius: "5px",
                 } : null
                 }

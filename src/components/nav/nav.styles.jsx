@@ -38,7 +38,7 @@ export const NavContainer = styled.nav`
 export const HeaderContainer = styled(Link)`
     text-decoration: none;
     position: relative;
-    background-color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.secondary};
     border: 2px solid rgba(82, 81, 81, 0.685);
     min-width: 43px;
     width: 100%;
@@ -53,6 +53,7 @@ export const HeaderContainer = styled(Link)`
         font-size: ${({ theme }) => theme.fontSizes.xxxl};
         position: relative;
         top: 4px;
+        left: -8px;
         font-weight: ${({ theme }) => theme.fontWeights.black};
         font-style: italic;
         color: #3c4d5d;

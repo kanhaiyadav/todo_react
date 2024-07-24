@@ -1,15 +1,28 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Layout.styles.scss";
 import { Outlet} from "react-router-dom";
 import Nav from "../nav/nav.component";
 import { selectJwt } from "../../Redux/user/user.selector";
 import { useSelector } from "react-redux";
+import { ThemeButton } from "./Layout.styles";
 // import { Link } from "react-router-dom";
 
-const Layout = () => {
+const Layout = ({toggleTheme}) => {
+    const [sun, setSun] = useState(true);
     const jwt = useSelector(selectJwt);
     return (
         <>
+            <ThemeButton
+                onClick={() => {
+                    toggleTheme();
+                    setSun(!sun);
+                }}
+                $sun={sun}
+            >
+                {
+                    !sun ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>
+                }
+            </ThemeButton>
             {
                 jwt ? <Nav />: null
             } 

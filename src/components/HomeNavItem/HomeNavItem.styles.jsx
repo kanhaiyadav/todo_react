@@ -8,7 +8,7 @@ export const HomeNavItemContainer = styled(NavLink)`
     padding: 8px 10px;
     cursor: default;
     &:hover {
-        filter: drop-shadow(2px 2px 3px #414141);
+        filter: drop-shadow(2px 2px 3px black);
         background-color: ${({ theme }) => theme.colors.hoverColor};;
     }
     &:active {
