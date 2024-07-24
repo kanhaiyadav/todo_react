@@ -13,7 +13,7 @@ export const register = createAsyncThunk(
     "user/register",
     async (user) => {
         try {
-            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/register", {
+            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const changeUsername = createAsyncThunk(
     "user/changeUsername",
     async ({ token, username }) => {
         try {
-            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/change_username", {
+            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/change_username", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -112,7 +112,7 @@ export const DeleteUser = createAsyncThunk(
     "user/DeleteUser",
     async ({ token }) => {
         try {
-            let response = await fetch(process.env.REACT_APP_BASE_URL + "/api/v1/users/delete", {
+            let response = await fetch("https://serverfortodoreactapp.onrender.com/api/v1/users/delete", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
