@@ -1,7 +1,7 @@
 import React from "react";
 import { NavContainer, HeaderContainer } from "./nav.styles";
 import NavItemDirectory from "../navItemDirectory/navItemDirectory.component";
-import favicon from "../../images/favicon.png";
+// import favicon from "/favicon.ico";
 import CustomButton from "../CustomButton/CustomButton.component";
 import { setJwt } from "../../Redux/user/user.slice";
 import { useDispatch} from "react-redux";
@@ -52,7 +52,7 @@ const Nav = () => {
     return (
         <NavContainer>
             <HeaderContainer to={"/home"}>
-                <img src={favicon} alt="" />
+                <img src='/favicon.ico' alt="" />
                 <span>ToDo</span>
             </HeaderContainer>
             <NavItemDirectory items={state.user} />

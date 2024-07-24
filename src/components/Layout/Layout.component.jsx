@@ -9,7 +9,7 @@ import { ThemeButton } from "./Layout.styles";
 
 const Layout = ({toggleTheme}) => {
     const [sun, setSun] = useState(true);
-    const jwt = useSelector(selectJwt);
+const jwt = useSelector(selectJwt);
     return (
         <>
             <ThemeButton
