@@ -1,12 +1,16 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { MainContainer, CommonInfo, UserInfo, TaskInfo, ProgressBarContainer } from './profileLayout.styles'
 import { useSelector } from 'react-redux'
 import { selectAvatar, selectEmail, selectName } from '../../Redux/user/user.selector'
 import { selectCreatetedTasks, selectCompletedTasks, selectDeletedTasks } from '../../Redux/user/user.selector'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { NavContainer } from './profileLayout.styles'
 import HomeNavItem from '../../components/HomeNavItem/HomeNavItem.component'
 import CircularProgressBar from '../../components/CircularProgressBar/CircularProgressBar.component'
+import { selectJwt } from '../../Redux/user/user.selector'
+import { verify } from '../../Redux/user/user.slice'
+import { selectError } from '../../Redux/user/user.selector'
+import { useDispatch } from 'react-redux'
 
 const ProfileLayout = () => {
     const avatar = useSelector(selectAvatar);
@@ -15,6 +19,23 @@ const ProfileLayout = () => {
     const createdTasks = useSelector(selectCreatetedTasks);
     const deletedTasks = useSelector(selectDeletedTasks);
     const completedTasks = useSelector(selectCompletedTasks);
+    const navigate = useNavigate();
+    const token = useSelector(selectJwt);
+    const dispatch = useDispatch();
+    const error = useSelector(selectError);
+
+
+    useEffect(() => {
+        dispatch(verify(token));
+    }, [dispatch, token]);
+
+    useEffect(() => {
+        if (error) {
+            navigate("/login");
+        }
+    }, [error, navigate]);
+    
+    
     return (
         <MainContainer>
             <CommonInfo>

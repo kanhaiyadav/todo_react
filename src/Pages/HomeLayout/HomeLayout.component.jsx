@@ -28,7 +28,6 @@ const HomeLayout = () => {
         dispatch(setDisplay(true));
     }
     useEffect(() => {
-        console.log(token);
         dispatch(verify(token));
     }, [dispatch, token]);
 

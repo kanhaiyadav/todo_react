@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Form } from './UsernameForm.styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeUsername } from '../../../../Redux/user/user.slice'
@@ -37,12 +37,12 @@ const UsernameForm = () => {
             }
         })
     }
-  return (
-      <Form onSubmit={handleSubmit}>
-          <input type='text' placeholder='New username' onChange={(e) => setUsername(e.target.value)} value={username}></input>
-          <button type={'submit'}>Done</button>
-      </Form>
-  )
+    return (
+        <Form onSubmit={handleSubmit}>
+            <input type='text' placeholder='New username' onChange={(e) => setUsername(e.target.value)} value={username} required></input>
+            <button type={'submit'}>Done</button>
+        </Form>
+    )
 }
 
 export default React.memo(UsernameForm);
