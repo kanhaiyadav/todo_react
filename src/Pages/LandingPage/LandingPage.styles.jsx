@@ -114,5 +114,4 @@ export const LandingPageContainer = styled.div`
     height: 100%;
     overflow: auto;
     padding: ${({ theme }) => theme.space.md};
-    padding-left: 40px;
 `

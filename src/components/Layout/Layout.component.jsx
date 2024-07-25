@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./Layout.styles.scss";
-import { Outlet} from "react-router-dom";
+import { Outlet, useLocation} from "react-router-dom";
 import Nav from "../nav/nav.component";
 import { selectJwt } from "../../Redux/user/user.selector";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { ThemeButton } from "./Layout.styles";
 
 const Layout = ({toggleTheme}) => {
     const [sun, setSun] = useState(true);
+    const location = useLocation();
 const jwt = useSelector(selectJwt);
     return (
         <>
@@ -24,7 +25,7 @@ const jwt = useSelector(selectJwt);
                 }
             </ThemeButton>
             {
-                jwt ? <Nav />: null
+                jwt && location.pathname !== '/' && location.pathname !== '/signup' && location.pathname !== '/login' ? <Nav />: null
             } 
             <Outlet />
         </>
