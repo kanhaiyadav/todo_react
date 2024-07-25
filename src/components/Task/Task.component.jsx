@@ -11,6 +11,7 @@ import completedSound from "../../assets/new-notification-on-your-device-138695.
 import CustomButton from "../CustomButton/CustomButton.component";
 import { checkLate } from "./TaskUtils";
 import noti_audio from "../../assets/mixkit-message-pop-alert-2354 (1).mp3";
+import error_audio from "../../assets/error.wav";
 import { selectJwt } from "../../Redux/user/user.selector";
 import { incCompletedTasks, incDeletedTasks } from "../../Redux/user/user.slice";
 
@@ -18,6 +19,7 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
 
     const notification = new Audio(noti_audio);
     const audio = new Audio(completedSound);
+    const error = new Audio(error_audio);
     const dispatch = useDispatch();
     const [hover, setHover] = useState(false);
     const [checkbox_clicked, setCheckbox_clicked] = useState(false);
@@ -42,13 +44,18 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
         event.stopPropagation();
         const deletePromise = dispatch(deleteTask({ id: id, token: jwt }));
         dispatch(incDeletedTasks());
-
         toast.promise(deletePromise,
             {
                 pending: 'Deleting task...',
-                success: "Task deleted successfully",
+                success: {
+                    render() {
+                        notification.play();
+                        return "Task deleted successfully"
+                    }
+                },
                 error: {
                     render({ data }) {
+                        error.play();
                         return data.message
                     },
                 },
@@ -57,7 +64,6 @@ const Task = ({ id, description, category, date, type, style, due, important }) 
                 position: "bottom-right",
             }
         )
-        notification.play();
     }
 
 
